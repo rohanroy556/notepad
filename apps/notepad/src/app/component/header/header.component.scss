@@ -1,0 +1,11 @@
+.mat-toolbar {
+    height: 100%;
+    .title {
+        padding: 0.25rem 1rem;
+        border-radius: 0.33rem;
+        cursor: pointer;
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+    }
+}

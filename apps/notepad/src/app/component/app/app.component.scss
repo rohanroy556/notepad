@@ -1,0 +1,10 @@
+@use 'variables';
+
+header {
+    height: variables.$header-height;
+}
+
+section {
+    height: variables.$section-height;
+    overflow: auto;
+}

@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@notepad/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@notepad/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@notepad/dashboard": ["libs/dashboard/src/index.ts"],
+      "@notepad/material": ["libs/material/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
