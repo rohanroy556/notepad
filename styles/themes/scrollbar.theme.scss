@@ -1,0 +1,31 @@
+@use 'variables';
+@import '~@angular/material/theming';
+@import 'state.theme';
+
+@mixin scrollbar-theme(
+    $height,
+    $width,
+    $background: variables.$scrollbar-track-color,
+    $color: variables.$primary
+) {
+    $default-hue: map-get(variables.$hue, default);
+    $hover-hue: map-get(variables.$hue, hover);
+    $active-hue: map-get(variables.$hue, active);
+
+    ::-webkit-scrollbar {
+        width: $height !important;
+        height: $width !important;
+    }
+    ::-webkit-scrollbar-track {
+        background: $background !important;
+        border-radius: variables.$border-radius;
+    }
+    ::-webkit-scrollbar-thumb {
+        border-radius: variables.$border-radius;
+        cursor: pointer;
+        @include define-states(
+            variables.$dark-theme,
+            variables.$scrollbar-hue
+        );
+    }
+}

@@ -1,0 +1,18 @@
+<div class="tools" [style.margin]="margin">
+  <mat-button-toggle-group class="tool" [(ngModel)]="displayType">
+    <mat-button-toggle [value]="displayTypes.Grid">
+			<mat-icon>grid_view</mat-icon>
+		</mat-button-toggle>
+    <mat-button-toggle [value]="displayTypes.List">
+			<mat-icon>view_list</mat-icon>
+		</mat-button-toggle>
+  </mat-button-toggle-group>
+  <button mat-raised-button class="tool" color="primary">
+    <mat-icon>add</mat-icon>
+    <span>Add Note</span>
+  </button>
+</div>
+<ng-container [ngSwitch]="displayType">
+	<notepad-grid *ngSwitchCase="displayTypes.Grid" [margin]="margin"></notepad-grid>
+	<notepad-list *ngSwitchCase="displayTypes.List" [margin]="margin"></notepad-list>
+</ng-container>

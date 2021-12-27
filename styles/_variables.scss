@@ -1,16 +1,41 @@
+@import '~@angular/material/theming';
+
+$primary: mat-palette($mat-blue-grey);
+$accent:  mat-palette($mat-amber, A200, A100, A400);
+$warn:    mat-palette($mat-deep-orange);
+$dark-theme: mat-dark-theme($primary, $accent, $warn);
+
 $white-color: #ffffff;
 $black-color: #000000;
-$light-blue: #1991eb;
-$meduim-blue: #2a6bb8;
-$primary-color: #3f51b5;
-$title-color: #43485c;
-$error-color: #ed1c24;
-$error-background-color: #fffae7;
-$success-color: #11e735;
-$disabled-title-color: #78869e;
-$disabled-bg-color: #f6f6f6;
-$scrollbar-thumb-color: #c4c4c4;
-$scrollbar-track-color: #f1f1f1;
+$primary-dark-color: mat-color($primary, 900);
+$primary-light-color: mat-color($primary, 50);
 
-$header-height: 3rem;
+$black-active-color: rgba($black-color, 0.2);
+$black-hover-color: rgba($black-color, 0.4);
+
+$info-color: mat-color(mat-palette($mat-blue), 400);
+$success-color: mat-color(mat-palette($mat-green), 400);
+$warning-color: mat-color(mat-palette($mat-yellow), 400);
+$error-color: mat-color(mat-palette($mat-red), 400);
+
+$scrollbar-track-color: $primary-light-color;
+
+$hue: (
+    default: 500,
+    hover: 700,
+    active: 900
+);
+$scrollbar-hue: (
+    default: 200,
+    hover: 500,
+    active: 900
+);
+$toolbar-hue: (
+    default: 500,
+    hover: 600,
+    active: 600
+);
+
+$header-height: 4rem;
 $section-height: calc(100% - #{ $header-height });
+$border-radius: 0.33rem;

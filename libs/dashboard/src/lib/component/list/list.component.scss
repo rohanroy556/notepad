@@ -1,0 +1,7 @@
+@use 'variables';
+
+.mat-list-item {
+    background-color: variables.$primary-light-color;
+    color: variables.$black-color;
+    border-bottom: 1px solid variables.$white-color;
+}

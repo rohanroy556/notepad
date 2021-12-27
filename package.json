@@ -7,7 +7,11 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main",
     "start": "node ./dist/apps/api/main.js",
     "build": "nx run-many --target=build --projects=notepad,api --parallel=true",
-    "test": "nx test"
+    "test": "nx test",
+    "lint": "nx workspace-lint && ng lint",
+    "lint:styles": "nx run-many --target=lint-styles --all --fix --parallel",
+    "lint:html": "htmllint \"apps/**/*.html\" \"libs/**/*.html\"",
+    "lint-all": "npx nx run-many --all --target=lint"
   },
   "private": true,
   "dependencies": {
@@ -60,10 +64,18 @@
     "eslint": "8.2.0",
     "eslint-config-prettier": "8.1.0",
     "eslint-plugin-cypress": "^2.10.3",
+    "htmllint": "0.8.0",
+    "htmllint-cli": "0.0.7",
     "jest": "27.2.3",
     "jest-preset-angular": "11.0.0",
     "prettier": "^2.3.1",
+    "stylelint": "13.8.0",
+    "stylelint-config-idiomatic-order": "8.1.0",
+    "stylelint-config-prettier": "8.0.2",
+    "stylelint-config-sass-guidelines": "7.1.0",
+    "stylelint-config-standard": "20.0.0",
     "ts-jest": "27.0.5",
+    "tslint": "6.0.0",
     "typescript": "~4.4.3"
   }
 }

@@ -1,4 +1,16 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'variables';
+@import 'theme';
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    @include button-toggle-theme();
+    @include toolbar-theme();
+
+    a, button {
+        @include default-state-theme;
+    }
+}
+
+@include scrollbar-theme(0.5rem, 0.2rem);
