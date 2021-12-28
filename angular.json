@@ -1,252 +1,260 @@
 {
-  "version": 1,
-  "projects": {
-    "api": {
-      "root": "apps/api",
-      "sourceRoot": "apps/api/src",
-      "projectType": "application",
-      "architect": {
-        "build": {
-          "builder": "@nrwl/node:build",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/api",
-            "main": "apps/api/src/main.ts",
-            "tsConfig": "apps/api/tsconfig.app.json",
-            "assets": ["apps/api/src/assets"]
-          },
-          "configurations": {
-            "production": {
-              "optimization": true,
-              "extractLicenses": true,
-              "inspect": false,
-              "fileReplacements": [
-                {
-                  "replace": "apps/api/src/environments/environment.ts",
-                  "with": "apps/api/src/environments/environment.prod.ts"
-                }
-              ]
-            }
-          }
-        },
-        "serve": {
-          "builder": "@nrwl/node:execute",
-          "options": {
-            "buildTarget": "api:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/api/**/*.ts"]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/api"],
-          "options": {
-            "jestConfig": "apps/api/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
-    "api-interfaces": {
-      "root": "libs/api-interfaces",
-      "sourceRoot": "libs/api-interfaces/src",
-      "projectType": "library",
-      "architect": {
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
-          }
-        }
-      },
-      "tags": []
-    },
-    "dashboard": {
-      "projectType": "library",
-      "root": "libs/dashboard",
-      "sourceRoot": "libs/dashboard/src",
-      "prefix": "notepad",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/dashboard"],
-          "options": {
-            "jestConfig": "libs/dashboard/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/dashboard/src/**/*.ts",
-              "libs/dashboard/src/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": []
-    },
-    "material": {
-      "projectType": "library",
-      "root": "libs/material",
-      "sourceRoot": "libs/material/src",
-      "prefix": "notepad",
-      "architect": {
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/material"],
-          "options": {
-            "jestConfig": "libs/material/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/material/src/**/*.ts",
-              "libs/material/src/**/*.html"
-            ]
-          }
-        }
-      },
-      "tags": []
-    },
-    "notepad": {
-      "projectType": "application",
-      "root": "apps/notepad",
-      "sourceRoot": "apps/notepad/src",
-      "prefix": "notepad",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-angular:browser",
-          "outputs": ["{options.outputPath}"],
-          "options": {
-            "outputPath": "dist/apps/notepad",
-            "index": "apps/notepad/src/index.html",
-            "main": "apps/notepad/src/main.ts",
-            "polyfills": "apps/notepad/src/polyfills.ts",
-            "tsConfig": "apps/notepad/tsconfig.app.json",
-            "inlineStyleLanguage": "scss",
-            "assets": [
-              "apps/notepad/src/favicon.ico",
-              "apps/notepad/src/assets"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "apps/notepad/src/styles.scss"
-            ],
-            "stylePreprocessorOptions": {
-              "includePaths": ["styles"]
-            },
-            "scripts": []
-          },
-          "configurations": {
-            "production": {
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "2mb",
-                  "maximumError": "5mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ],
-              "fileReplacements": [
-                {
-                  "replace": "apps/notepad/src/environments/environment.ts",
-                  "with": "apps/notepad/src/environments/environment.prod.ts"
-                }
-              ],
-              "outputHashing": "all"
-            },
-            "development": {
-              "buildOptimizer": false,
-              "optimization": false,
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "sourceMap": true,
-              "namedChunks": true
-            }
-          },
-          "defaultConfiguration": "production"
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
-          "configurations": {
-            "production": {
-              "browserTarget": "notepad:build:production"
-            },
-            "development": {
-              "browserTarget": "notepad:build:development"
-            }
-          },
-          "defaultConfiguration": "development"
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "notepad:build"
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "apps/notepad/src/**/*.ts",
-              "apps/notepad/src/**/*.html"
-            ]
-          }
-        },
-        "test": {
-          "builder": "@nrwl/jest:jest",
-          "outputs": ["coverage/apps/notepad"],
-          "options": {
-            "jestConfig": "apps/notepad/jest.config.js",
-            "passWithNoTests": true
-          }
-        }
-      },
-      "tags": []
-    },
-    "notepad-e2e": {
-      "root": "apps/notepad-e2e",
-      "sourceRoot": "apps/notepad-e2e/src",
-      "projectType": "application",
-      "architect": {
-        "e2e": {
-          "builder": "@nrwl/cypress:cypress",
-          "options": {
-            "cypressConfig": "apps/notepad-e2e/cypress.json",
-            "devServerTarget": "notepad:serve:development"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "notepad:serve:production"
-            }
-          }
-        },
-        "lint": {
-          "builder": "@nrwl/linter:eslint",
-          "outputs": ["{options.outputFile}"],
-          "options": {
-            "lintFilePatterns": ["apps/notepad-e2e/**/*.{js,ts}"]
-          }
-        }
-      },
-      "tags": [],
-      "implicitDependencies": ["notepad"]
-    }
-  }
+	"version": 1,
+	"projects": {
+		"api": {
+			"root": "apps/api",
+			"sourceRoot": "apps/api/src",
+			"projectType": "application",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:build",
+					"outputs": ["{options.outputPath}"],
+					"options": {
+						"outputPath": "dist/apps/api",
+						"main": "apps/api/src/main.ts",
+						"tsConfig": "apps/api/tsconfig.app.json",
+						"assets": ["apps/api/src/assets"]
+					},
+					"configurations": {
+						"production": {
+							"optimization": true,
+							"extractLicenses": true,
+							"inspect": false,
+							"fileReplacements": [
+								{
+									"replace": "apps/api/src/environments/environment.ts",
+									"with": "apps/api/src/environments/environment.prod.ts"
+								}
+							]
+						}
+					}
+				},
+				"serve": {
+					"builder": "@nrwl/node:execute",
+					"options": {
+						"buildTarget": "api:build"
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"outputs": ["{options.outputFile}"],
+					"options": {
+						"lintFilePatterns": ["apps/api/**/*.ts"]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/apps/api"],
+					"options": {
+						"jestConfig": "apps/api/jest.config.js",
+						"passWithNoTests": true
+					}
+				}
+			},
+			"tags": []
+		},
+		"api-interfaces": {
+			"root": "libs/api-interfaces",
+			"sourceRoot": "libs/api-interfaces/src",
+			"projectType": "library",
+			"architect": {
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"outputs": ["{options.outputFile}"],
+					"options": {
+						"lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
+					}
+				}
+			},
+			"tags": []
+		},
+		"dashboard": {
+			"projectType": "library",
+			"root": "libs/dashboard",
+			"sourceRoot": "libs/dashboard/src",
+			"prefix": "notepad",
+			"architect": {
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/libs/dashboard"],
+					"options": {
+						"jestConfig": "libs/dashboard/jest.config.js",
+						"passWithNoTests": true
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": ["libs/dashboard/src/**/*.ts", "libs/dashboard/src/**/*.html"]
+					}
+				}
+			},
+			"tags": []
+		},
+		"editor": {
+			"projectType": "library",
+			"root": "libs/editor",
+			"sourceRoot": "libs/editor/src",
+			"prefix": "notepad",
+			"architect": {
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/libs/editor"],
+					"options": {
+						"jestConfig": "libs/editor/jest.config.js",
+						"passWithNoTests": true
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": ["libs/editor/src/**/*.ts", "libs/editor/src/**/*.html"]
+					}
+				}
+			},
+			"tags": []
+		},
+		"material": {
+			"projectType": "library",
+			"root": "libs/material",
+			"sourceRoot": "libs/material/src",
+			"prefix": "notepad",
+			"architect": {
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/libs/material"],
+					"options": {
+						"jestConfig": "libs/material/jest.config.js",
+						"passWithNoTests": true
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": ["libs/material/src/**/*.ts", "libs/material/src/**/*.html"]
+					}
+				}
+			},
+			"tags": []
+		},
+		"notepad": {
+			"projectType": "application",
+			"root": "apps/notepad",
+			"sourceRoot": "apps/notepad/src",
+			"prefix": "notepad",
+			"architect": {
+				"build": {
+					"builder": "@angular-devkit/build-angular:browser",
+					"outputs": ["{options.outputPath}"],
+					"options": {
+						"outputPath": "dist/apps/notepad",
+						"index": "apps/notepad/src/index.html",
+						"main": "apps/notepad/src/main.ts",
+						"polyfills": "apps/notepad/src/polyfills.ts",
+						"tsConfig": "apps/notepad/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": ["apps/notepad/src/favicon.ico", "apps/notepad/src/assets"],
+						"styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "apps/notepad/src/styles.scss"],
+						"stylePreprocessorOptions": {
+							"includePaths": ["styles"]
+						},
+						"scripts": []
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "2mb",
+									"maximumError": "5mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "apps/notepad/src/environments/environment.ts",
+									"with": "apps/notepad/src/environments/environment.prod.ts"
+								}
+							],
+							"outputHashing": "all"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "@angular-devkit/build-angular:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "notepad:build:production"
+						},
+						"development": {
+							"browserTarget": "notepad:build:development"
+						}
+					},
+					"defaultConfiguration": "development"
+				},
+				"extract-i18n": {
+					"builder": "@angular-devkit/build-angular:extract-i18n",
+					"options": {
+						"browserTarget": "notepad:build"
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": ["apps/notepad/src/**/*.ts", "apps/notepad/src/**/*.html"]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/apps/notepad"],
+					"options": {
+						"jestConfig": "apps/notepad/jest.config.js",
+						"passWithNoTests": true
+					}
+				}
+			},
+			"tags": []
+		},
+		"notepad-e2e": {
+			"root": "apps/notepad-e2e",
+			"sourceRoot": "apps/notepad-e2e/src",
+			"projectType": "application",
+			"architect": {
+				"e2e": {
+					"builder": "@nrwl/cypress:cypress",
+					"options": {
+						"cypressConfig": "apps/notepad-e2e/cypress.json",
+						"devServerTarget": "notepad:serve:development"
+					},
+					"configurations": {
+						"production": {
+							"devServerTarget": "notepad:serve:production"
+						}
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"outputs": ["{options.outputFile}"],
+					"options": {
+						"lintFilePatterns": ["apps/notepad-e2e/**/*.{js,ts}"]
+					}
+				}
+			},
+			"tags": [],
+			"implicitDependencies": ["notepad"]
+		}
+	}
 }

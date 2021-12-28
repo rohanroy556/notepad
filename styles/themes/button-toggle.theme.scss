@@ -5,21 +5,23 @@
 @mixin button-toggle-theme($theme: variables.$dark-theme, $hue: variables.$hue) {
 	$active-hue: map-get($hue, active);
 	$checked-hue: (
-        default: $active-hue,
-        hover: $active-hue,
-        active: $active-hue
-    );
+		default: $active-hue,
+		hover: $active-hue,
+		active: $active-hue
+	);
 
 	.mat-button-toggle-group {
 		border-radius: variables.$border-radius;
 		.mat-button-toggle {
-            @include define-states($theme, $hue);
+			@include define-states($theme, $hue);
 		}
 		.mat-button-toggle-checked {
-            @include define-states($theme, $checked-hue);
+			@include define-states($theme, $checked-hue);
 		}
-        button, button:hover, button:active {
-            background-color: transparent !important;
-        }
+		button,
+		button:hover,
+		button:active {
+			background-color: transparent !important;
+		}
 	}
 }

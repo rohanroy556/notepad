@@ -1,24 +1,25 @@
 {
-  "compileOnSave": false,
-  "compilerOptions": {
-    "rootDir": ".",
-    "sourceMap": true,
-    "declaration": false,
-    "moduleResolution": "node",
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
-    "lib": ["es2017", "dom"],
-    "skipLibCheck": true,
-    "skipDefaultLibCheck": true,
-    "baseUrl": ".",
-    "paths": {
-      "@notepad/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@notepad/dashboard": ["libs/dashboard/src/index.ts"],
-      "@notepad/material": ["libs/material/src/index.ts"]
-    }
-  },
-  "exclude": ["node_modules", "tmp"]
+	"compileOnSave": false,
+	"compilerOptions": {
+		"rootDir": ".",
+		"sourceMap": true,
+		"declaration": false,
+		"moduleResolution": "node",
+		"emitDecoratorMetadata": true,
+		"experimentalDecorators": true,
+		"importHelpers": true,
+		"target": "es2015",
+		"module": "esnext",
+		"lib": ["es2017", "dom"],
+		"skipLibCheck": true,
+		"skipDefaultLibCheck": true,
+		"baseUrl": ".",
+		"paths": {
+			"@notepad/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+			"@notepad/dashboard": ["libs/dashboard/src/index.ts"],
+			"@notepad/editor": ["libs/editor/src/index.ts"],
+			"@notepad/material": ["libs/material/src/index.ts"]
+		}
+	},
+	"exclude": ["node_modules", "tmp"]
 }

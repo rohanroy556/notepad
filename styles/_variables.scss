@@ -1,8 +1,8 @@
 @import '~@angular/material/theming';
 
 $primary: mat-palette($mat-blue-grey);
-$accent:  mat-palette($mat-amber, A200, A100, A400);
-$warn:    mat-palette($mat-deep-orange);
+$accent: mat-palette($mat-amber, A200, A100, A400);
+$warn: mat-palette($mat-deep-orange);
 $dark-theme: mat-dark-theme($primary, $accent, $warn);
 
 $white-color: #ffffff;
@@ -21,21 +21,25 @@ $error-color: mat-color(mat-palette($mat-red), 400);
 $scrollbar-track-color: $primary-light-color;
 
 $hue: (
-    default: 500,
-    hover: 700,
-    active: 900
+	default: 500,
+	hover: 700,
+	active: 900
 );
 $scrollbar-hue: (
-    default: 200,
-    hover: 500,
-    active: 900
+	default: 200,
+	hover: 500,
+	active: 900
 );
 $toolbar-hue: (
-    default: 500,
-    hover: 600,
-    active: 600
+	default: 500,
+	hover: 600,
+	active: 600
 );
 
 $header-height: 4rem;
-$section-height: calc(100% - #{ $header-height });
+$section-height: calc(100% - #{$header-height});
 $border-radius: 0.33rem;
+
+$selectors: 'button' '.mat-button' '.mat-raised-button' '.mat-flat-button' '.mat-icon-button' '.mat-stroked-button' '.mat-fab'
+	'.mat-mini-fab';
+$excluded-selectors: '.editor-container';

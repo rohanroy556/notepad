@@ -3,13 +3,13 @@
 @import 'state.theme';
 
 @mixin toolbar-theme($theme: variables.$dark-theme, $hue: variables.$toolbar-hue) {
-    .mat-toolbar {
-        height: 100%;
-        @include define-states($theme, $hue);
-        .title {
-            line-height: 3rem;
-            font-size: 1.5rem;
-            text-transform: uppercase;
-        }
-    }
+	.mat-toolbar {
+		height: 100%;
+		@include define-states($theme, $hue);
+		.title {
+			line-height: 3rem;
+			font-size: 1.5rem;
+			text-transform: uppercase;
+		}
+	}
 }

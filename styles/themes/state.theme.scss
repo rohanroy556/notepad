@@ -2,50 +2,50 @@
 @import '~@angular/material/theming';
 
 @mixin set-color($palette, $hue) {
-    background-color: mat-color($palette, $hue) !important;
-    color: mat-contrast($palette, $hue) !important;
+	background-color: mat-color($palette, $hue) !important;
+	color: mat-contrast($palette, $hue) !important;
 }
 
 @mixin define-states($theme, $hue) {
-    $config: mat-get-color-config($theme);
-    $primary: map-get($config, primary);
-    $accent: map-get($config, accent);
-    $warn: map-get($config, warn);
-    $color-list: (
-        'primary': $primary,
-        'accent': $accent,
-        'warn': $warn,
-    );
-    $default-hue: map-get($hue, default);
-    $hover-hue: map-get($hue, hover);
-    $active-hue: map-get($hue, active);
+	$config: mat-get-color-config($theme);
+	$primary: map-get($config, primary);
+	$accent: map-get($config, accent);
+	$warn: map-get($config, warn);
+	$color-list: (
+		'primary': $primary,
+		'accent': $accent,
+		'warn': $warn
+	);
+	$default-hue: map-get($hue, default);
+	$hover-hue: map-get($hue, hover);
+	$active-hue: map-get($hue, active);
 
-    & {
-        @include set-color($primary, $default-hue);
-        &:hover {
-            @include set-color($primary, $hover-hue);
-        }
-        &:active, &.active, &.selected, &.checked {
-            @include set-color($primary, $active-hue);
-        }
-    }
-    
-    @each $key, $val in $color-list {
-        &[color="#{$key}"] {
-            @include set-color($val, $default-hue);
-            &:hover {
-                @include set-color($val, $hover-hue);
-            }
-            &:active {
-                @include set-color($val, $active-hue);
-            }
-        }
-    }
+	& {
+		@include set-color($primary, $default-hue);
+		&:hover {
+			@include set-color($primary, $hover-hue);
+		}
+		&:active,
+		&.active,
+		&.selected,
+		&.checked {
+			@include set-color($primary, $active-hue);
+		}
+	}
+
+	@each $key, $val in $color-list {
+		&[color='#{$key}'] {
+			@include set-color($val, $default-hue);
+			&:hover {
+				@include set-color($val, $hover-hue);
+			}
+			&:active {
+				@include set-color($val, $active-hue);
+			}
+		}
+	}
 }
 
 @mixin default-state-theme {
-    @include define-states(
-        variables.$dark-theme,
-        variables.$hue
-    );
+	@include define-states(variables.$dark-theme, variables.$hue);
 }

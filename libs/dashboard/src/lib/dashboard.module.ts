@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule } from '@notepad/material';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent, GridComponent, ListComponent,NoteComponent } from './component';
+import { EditorModule } from '@notepad/editor';
 
 @NgModule({
   imports: [
     CommonModule,
     DashboardRoutingModule,
+		EditorModule,
     FormsModule,
     MaterialModule
   ],
