@@ -1,4 +1,4 @@
 export enum DisplayType {
-    Grid = 'grid',
-    List = 'list'
+	Grid = 'grid',
+	List = 'list'
 }

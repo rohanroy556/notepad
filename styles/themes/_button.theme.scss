@@ -1,0 +1,9 @@
+@use 'variables';
+@import '~@angular/material/theming';
+@import 'state.theme';
+
+@mixin theme($theme: variables.$dark-theme, $hue: variables.$hue) {
+	#{ variables.$joined-button-selectors } {
+		@include default-state-theme;
+	}
+}

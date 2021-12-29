@@ -1,0 +1,63 @@
+@use 'variables';
+@import '~@angular/material/theming';
+@import 'state.theme';
+
+@mixin theme($theme: variables.$dark-theme, $hue: variables.$hue) {
+	$active-hue: map-get($hue, active);
+	$selected-hue: (
+		default: $active-hue,
+		hover: $active-hue,
+		active: $active-hue
+	);
+
+	.mat-list-item {
+		height: 5rem !important;
+		cursor: pointer;
+		border-radius: variables.$border-radius;
+		&:not(:last-of-type) {
+			margin-bottom: 1rem;
+		}
+		@extend .mat-elevation-z2;
+		@include default-state-theme;
+		&:hover {
+			@extend .mat-elevation-z6;
+		}
+		&:active {
+			@extend .mat-elevation-z8;
+		}
+		.mat-list-item-content {
+			$font-size: 0.6rem;
+			align-items: stretch !important;
+			* {
+				margin: 0;
+			}
+			.index {
+				padding-right: 0.4rem;
+				display: inherit;
+				align-items: center;
+				font-size: $font-size;
+			}
+			.content {
+				display: inherit;
+				flex-direction: column;
+				align-items: stretch;
+				justify-content: flex-end;
+				width: 100%;
+				padding: 0.5rem;
+			}
+			.title {
+				overflow: auto;
+			}
+			.subtitle {
+				font-size: $font-size;
+			}
+			.actions {
+				display: inherit;
+				align-items: center;
+				button {
+					margin-left: 0.5rem;
+				}
+			}
+		}
+	}
+}

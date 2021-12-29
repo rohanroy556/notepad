@@ -1,6 +1,10 @@
+import { Content } from '@notepad/editor';
+
 export interface Note {
-    name: string;
-    content: string;
-    time: Date;
-    author: string;
+	_id: string;
+	name: string;
+	content: Content;
+	createdAt: Date;
+	updatedAt: Date;
+	author: string;
 }

@@ -1,3 +1,22 @@
 <mat-grid-list [cols]="cols" [rowHeight]="rowHeight" [gutterSize]="margin" [style.margin]="margin" (window:resize)="onResize()">
-	<mat-grid-tile *ngFor="let note of notes" color="accent">{{ note }}</mat-grid-tile>
+	<mat-grid-tile *ngFor="let note of notes; let i = index" [attr.color]="color" class="thin-scroll">
+		<div class="content thin-scrollbar">
+			<p class="index">{{ i + 1 }})</p>
+			<div class="header">
+				<h2 class="title thin-scrollbar">{{ note.name }}</h2>
+				<p class="subtitle">
+					<em>Updated At: &nbsp;</em>
+					<b>{{ note.updatedAt | date: 'medium' }}</b>
+				</p>
+			</div>
+		</div>
+		<div class="actions">
+			<button mat-icon-button>
+				<mat-icon>edit</mat-icon>
+			</button>
+			<button mat-icon-button>
+				<mat-icon>delete</mat-icon>
+			</button>
+		</div>
+	</mat-grid-tile>
 </mat-grid-list>

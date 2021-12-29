@@ -2,7 +2,7 @@
 @import '~@angular/material/theming';
 @import 'state.theme';
 
-@mixin toolbar-theme($theme: variables.$dark-theme, $hue: variables.$toolbar-hue) {
+@mixin theme($theme: variables.$dark-theme, $hue: variables.$toolbar-hue) {
 	.mat-toolbar {
 		height: 100%;
 		@include define-states($theme, $hue);

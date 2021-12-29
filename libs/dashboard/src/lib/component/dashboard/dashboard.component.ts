@@ -1,15 +1,18 @@
 import { Component } from '@angular/core';
-import { DisplayType } from '../../model';
+import { notes } from '../../constant/notes';
+import { DisplayType, Note } from '../../model';
 
 @Component({
-  selector: 'notepad-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss'],
+	selector: 'notepad-dashboard',
+	templateUrl: './dashboard.component.html',
+	styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
-  margin = '1rem';
-  displayType: DisplayType = this.displayTypes.Grid;
-  get displayTypes(): typeof DisplayType {
-    return DisplayType;
-  }
+	color = 'accent';
+	margin = '1rem';
+	notes: Array<Note> = notes;
+	displayType: DisplayType = this.displayTypes.Grid;
+	get displayTypes(): typeof DisplayType {
+		return DisplayType;
+	}
 }

@@ -1,14 +1,20 @@
-<mat-nav-list [style.margin]="margin">
-	<mat-list-item >1</mat-list-item>
-	<mat-list-item>2</mat-list-item>
-	<mat-list-item>3</mat-list-item>
-	<mat-list-item>4</mat-list-item>
-	<mat-list-item>5</mat-list-item>
-	<mat-list-item>6</mat-list-item>
-	<mat-list-item>7</mat-list-item>
-	<mat-list-item>8</mat-list-item>
-	<mat-list-item>9</mat-list-item>
-	<mat-list-item>10</mat-list-item>
-	<mat-list-item>11</mat-list-item>
-	<mat-list-item>12</mat-list-item>
-</mat-nav-list>
+<mat-list [style.margin]="margin">
+	<mat-list-item *ngFor="let note of notes; let i = index" [attr.color]="color">
+		<p class="index">{{ i + 1 }})</p>
+		<div class="content thin-scrollbar">
+			<h2 class="title thin-scrollbar">{{ note.name }}</h2>
+			<p class="subtitle">
+				<em>Updated At: &nbsp;</em>
+				<b>{{ note.updatedAt | date: 'medium' }}</b>
+			</p>
+		</div>
+		<div class="actions">
+			<button mat-icon-button>
+				<mat-icon>edit</mat-icon>
+			</button>
+			<button mat-icon-button>
+				<mat-icon>delete</mat-icon>
+			</button>
+		</div>
+	</mat-list-item>
+</mat-list>

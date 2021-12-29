@@ -1,5 +1,47 @@
 @import '~@angular/material/theming';
 
+@function wrap-string($string) {
+	@return ':not(' + $string + ')';
+}
+
+@function multiply-string-to-list-join($list, $string, $seperator1: ', ', $seperator2: ' ') {
+	$value: '';
+	@each $i in $list {
+		$new-value: $i + $seperator2 + $string;
+		@if $value == '' {
+			$value: $new-value;
+		} @else {
+			$value: $value + $seperator1 + $new-value;
+		}
+	}
+	@return wrap-string($value);
+}
+
+@function multiply-lists-join($list1, $list2) {
+	$value: '';
+	@each $i in $list1 {
+		$new-value: $i + multiply-string-to-list-join($list2, $i);
+		@if $value == '' {
+			$value: $new-value;
+		} @else {
+			$value: $value + ', ' + $new-value;
+		}
+	}
+	@return $value;
+}
+
+@function list-join($list, $seperator: ',') {
+	$value: '';
+	@each $i in $list {
+		@if $value == '' {
+			$value: $i;
+		} @else {
+			$value: $value + $seperator + $i;
+		}
+	}
+	@return $value;
+}
+
 $primary: mat-palette($mat-blue-grey);
 $accent: mat-palette($mat-amber, A200, A100, A400);
 $warn: mat-palette($mat-deep-orange);
@@ -40,6 +82,6 @@ $header-height: 4rem;
 $section-height: calc(100% - #{$header-height});
 $border-radius: 0.33rem;
 
-$selectors: 'button' '.mat-button' '.mat-raised-button' '.mat-flat-button' '.mat-icon-button' '.mat-stroked-button' '.mat-fab'
-	'.mat-mini-fab';
-$excluded-selectors: '.editor-container';
+$button-selectors: '.mat-button' '.mat-raised-button' '.mat-flat-button' '.mat-icon-button' '.mat-stroked-button' '.mat-fab' '.mat-mini-fab';
+$excluded-button-selectors: '.editor-container' '.mat-button-toggle-group';
+$joined-button-selectors: list-join($button-selectors);

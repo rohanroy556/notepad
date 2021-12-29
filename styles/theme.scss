@@ -1,10 +1,6 @@
 @use 'variables';
 @import '~@angular/material/theming';
-@import 'themes/button-toggle.theme';
-@import 'themes/grid.theme';
-@import 'themes/scrollbar.theme';
-@import 'themes/state.theme';
-@import 'themes/toolbar.theme';
+@import 'themes';
 
 @include mat-core();
 @include angular-material-theme(variables.$dark-theme);

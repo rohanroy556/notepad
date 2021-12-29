@@ -8,16 +8,16 @@ body {
 body {
 	margin: 0;
 	font-family: Roboto, 'Helvetica Neue', sans-serif;
+	@include button-theme();
 	@include button-toggle-theme();
 	@include grid-theme();
+	@include list-theme();
 	@include toolbar-theme();
-
-	@each $selector in variables.$selectors {
-		$excluded-selector: zip(variables.$excluded-selectors, $selector);
-		#{ $selector }:not(#{ $excluded-selector }) {
-			@include default-state-theme;
-		}
-	}
 }
 
-@include scrollbar-theme(0.5rem, 0.2rem);
+* {
+	@include scrollbar-theme(0.5rem, 0.2rem);
+}
+.thin-scrollbar {
+	@include scrollbar-theme(0.2rem, 0.2rem);
+}

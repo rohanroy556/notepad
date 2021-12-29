@@ -1,0 +1,70 @@
+@use 'variables';
+@import '~@angular/material/theming';
+@import 'state.theme';
+
+@mixin theme($theme: variables.$dark-theme, $hue: variables.$hue) {
+	$active-hue: map-get($hue, active);
+	$selected-hue: (
+		default: $active-hue,
+		hover: $active-hue,
+		active: $active-hue
+	);
+
+	.mat-grid-list {
+		.mat-grid-tile {
+			border-radius: variables.$border-radius;
+			cursor: pointer;
+			@extend .mat-elevation-z2;
+			@include default-state-theme;
+			&:hover {
+				@extend .mat-elevation-z6;
+			}
+			&:active {
+				@extend .mat-elevation-z8;
+			}
+			.mat-grid-tile-content {
+				$padding: 1rem;
+				$font-size: 0.6rem;
+				flex-direction: column;
+				align-items: stretch;
+				* {
+					margin: 0;
+				}
+				.content {
+					display: flex;
+					justify-content: stretch;
+					height: 100%;
+					padding: $padding;
+					border-bottom: 1px solid variables.$primary-light-color;
+					overflow: auto;
+					.index {
+						padding-right: 0.4rem;
+						display: inherit;
+						align-items: center;
+						font-size: $font-size;
+					}
+					.header {
+						display: inherit;
+						flex-direction: column;
+						align-items: stretch;
+						justify-content: flex-end;
+					}
+					.title {
+						overflow: auto;
+					}
+					.subtitle {
+						font-size: $font-size;
+					}
+				}
+				.actions {
+					display: flex;
+					justify-content: flex-end;
+					padding: calc($padding / 2) $padding;
+					button:not(:last-of-type) {
+						margin-right: 0.5rem;
+					}
+				}
+			}
+		}
+	}
+}
