@@ -2,10 +2,13 @@
 @import '~@angular/material/theming';
 @import 'state.theme';
 
-@mixin theme($theme: variables.$dark-theme, $hue: variables.$toolbar-hue) {
+@mixin theme($theme: variables.$light-theme, $hue: variables.$toolbar-hue) {
 	.mat-toolbar {
 		height: 100%;
 		@include define-states($theme, $hue);
+		& > *:not(:last-child) {
+			margin-right: 1rem;
+		}
 		.title {
 			line-height: 3rem;
 			font-size: 1.5rem;

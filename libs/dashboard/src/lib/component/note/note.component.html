@@ -1,1 +1,25 @@
-<notepad-editor></notepad-editor>
+<form *ngIf="show$ | async as show" [formGroup]="noteForm">
+	<mat-form-field [color]="color" class="name-form-field">
+		<mat-label>Name</mat-label>
+		<input matInput placeholder="Name" formControlName="name" />
+		<ng-container *ngTemplateOutlet="error; context: { control: name, label: 'Name', className: 'name-form-field-error' }"></ng-container>
+	</mat-form-field>
+	<mat-form-field [color]="color" class="content-form-field">
+		<mat-label>Content</mat-label>
+		<notepad-editor formControlName="content"></notepad-editor>
+		<ng-container
+			*ngTemplateOutlet="error; context: { control: content, label: 'Content', className: 'content-form-field-error' }"
+		></ng-container>
+	</mat-form-field>
+	<button mat-raised-button [color]="color" [disabled]="!noteForm.valid" (click)="submit()">
+		<mat-icon>save</mat-icon>
+		<span>Save</span>
+	</button>
+</form>
+<ng-template #error let-control="control" let-label="label" let-className="className">
+	<mat-error *ngIf="hasError(control)" [class]="className">
+		<span *ngIf="control.errors.required">{{ label }} is required</span>
+		<span *ngIf="control.errors.minlength">{{ label }} must have atleast {{ nameMinLength }} characters</span>
+		<span *ngIf="control.errors.maxlength">{{ label }} has exceeded {{ nameMaxLength }} characters</span>
+	</mat-error>
+</ng-template>

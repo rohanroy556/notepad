@@ -1,597 +1,160 @@
-import { Component, OnDestroy } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FocusMonitor } from '@angular/cdk/a11y';
+import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
+import { Component, ElementRef, HostBinding, Inject, Input, OnDestroy, Optional, Self, ViewChild } from '@angular/core';
+import { FormGroup, FormControl, ControlValueAccessor, NgControl } from '@angular/forms';
+import { MatFormField, MatFormFieldControl, MAT_FORM_FIELD } from '@angular/material/form-field';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
+import { map, Subject } from 'rxjs';
+import { TOOLBAR } from '../../configuration';
 import { Content } from '../../model';
 
 @Component({
 	selector: 'notepad-editor',
 	templateUrl: './editor.component.html',
-	styleUrls: ['./editor.component.scss']
+	styleUrls: ['./editor.component.scss'],
+	providers: [{ provide: MatFormFieldControl, useExisting: EditorComponent }]
 })
-export class EditorComponent implements OnDestroy {
-	editorDoc: Content = {
-		type: 'doc',
-		content: [
-			{
-				type: 'heading',
-				attrs: {
-					level: 1,
-					align: null
-				},
-				content: [
-					{
-						type: 'text',
-						text: 'Hello'
-					}
-				]
-			},
-			{
-				type: 'paragraph',
-				attrs: {
-					align: null
-				},
-				content: [
-					{
-						type: 'text',
-						text: 'This is editable text. '
-					},
-					{
-						type: 'text',
-						marks: [
-							{
-								type: 'text_color',
-								attrs: {
-									color: '#d93f0b'
-								}
-							}
-						],
-						text: 'You can focus it and start typing'
-					},
-					{
-						type: 'text',
-						text: '.'
-					}
-				]
-			},
-			{
-				type: 'paragraph',
-				attrs: {
-					align: null
-				},
-				content: [
-					{
-						type: 'text',
-						marks: [
-							{
-								type: 'code'
-							}
-						],
-						text: 'code block'
-					}
-				]
-			},
-			{
-				type: 'blockquote',
-				content: [
-					{
-						type: 'paragraph',
-						attrs: {
-							align: null
-						},
-						content: [
-							{
-								type: 'text',
-								marks: [
-									{
-										type: 'strong'
-									}
-								],
-								text: 'Lorem Ipsum'
-							},
-							{
-								type: 'text',
-								text: ' is '
-							},
-							{
-								type: 'text',
-								marks: [
-									{
-										type: 'text_background_color',
-										attrs: {
-											backgroundColor: '#fbca04'
-										}
-									}
-								],
-								text: 'simply dummy'
-							},
-							{
-								type: 'text',
-								text: ' text of the printing and typesetting industry. '
-							},
-							{
-								type: 'text',
-								marks: [
-									{
-										type: 'em'
-									}
-								],
-								text: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
-							},
-							{
-								type: 'text',
-								text: ', when an unknown printer took a galley of type and scrambled it to make a type specimen book.'
-							}
-						]
-					}
-				]
-			},
-			{
-				type: 'heading',
-				attrs: {
-					level: 2,
-					align: null
-				},
-				content: [
-					{
-						type: 'text',
-						text: 'The code block is a code editor'
-					}
-				]
-			},
-			{
-				type: 'paragraph',
-				attrs: {
-					align: null
-				},
-				content: [
-					{
-						type: 'text',
-						text: 'This editor has been wired up to render code blocks as instances of the '
-					},
-					{
-						type: 'text',
-						marks: [
-							{
-								type: 'link',
-								attrs: {
-									href: 'https://codemirror.net',
-									title: 'https://codemirror.net',
-									target: '_blank'
-								}
-							}
-						],
-						text: 'CodeMirror'
-					},
-					{
-						type: 'text',
-						text: ' code editor, which provides '
-					},
-					{
-						type: 'text',
-						marks: [
-							{
-								type: 'link',
-								attrs: {
-									href: 'https://en.wikipedia.org',
-									title: '',
-									target: '_blank'
-								}
-							}
-						],
-						text: 'syntax highlighting'
-					},
-					{
-						type: 'text',
-						text: ', auto-indentation, and similar.'
-					}
-				]
-			},
-			{
-				type: 'code_block',
-				content: [
-					{
-						type: 'text',
-						text: 'function max(a, b) {\n  return a > b ? a : b\n}'
-					}
-				]
-			},
-			{
-				type: 'paragraph',
-				attrs: {
-					align: null
-				},
-				content: [
-					{
-						type: 'text',
-						text: "The content of the code editor is kept in sync with the content of the code block in the rich text editor, so that it is as if you're directly editing the outer document, using a more convenient interface."
-					}
-				]
-			},
-			{
-				type: 'heading',
-				attrs: {
-					level: 4,
-					align: 'center'
-				},
-				content: [
-					{
-						type: 'text',
-						text: 'Mr. Bean'
-					}
-				]
-			},
-			{
-				type: 'paragraph',
-				attrs: {
-					align: 'center'
-				},
-				content: [
-					{
-						type: 'text',
-						text: 'The image is resizable. Include '
-					},
-					{
-						type: 'text',
-						marks: [
-							{
-								type: 'strong'
-							}
-						],
-						text: 'image'
-					},
-					{
-						type: 'text',
-						text: ' plugin to enable image resizing'
-					}
-				]
-			},
-			{
-				type: 'heading',
-				attrs: {
-					level: 3,
-					align: 'center'
-				},
-				content: [
-					{
-						type: 'image',
-						attrs: {
-							src: 'https://wallpapercave.com/wp/wp2318909.png',
-							alt: 'Bean',
-							title: 'Mr. Bean',
-							width: '98px'
-						}
-					}
-				]
-			},
-			{
-				type: 'heading',
-				attrs: {
-					level: 3,
-					align: null
-				},
-				content: [
-					{
-						type: 'text',
-						text: 'Bullet list'
-					}
-				]
-			},
-			{
-				type: 'bullet_list',
-				content: [
-					{
-						type: 'list_item',
-						content: [
-							{
-								type: 'paragraph',
-								attrs: {
-									align: null
-								},
-								content: [
-									{
-										type: 'text',
-										marks: [
-											{
-												type: 'strong'
-											}
-										],
-										text: 'Lorem Ipsum'
-									},
-									{
-										type: 'text',
-										text: ' is simply dummy text of the printing and typesetting industry'
-									}
-								]
-							},
-							{
-								type: 'bullet_list',
-								content: [
-									{
-										type: 'list_item',
-										content: [
-											{
-												type: 'paragraph',
-												attrs: {
-													align: null
-												},
-												content: [
-													{
-														type: 'text',
-														text: '('
-													},
-													{
-														type: 'text',
-														marks: [
-															{
-																type: 'strong'
-															}
-														],
-														text: 'depth 1'
-													},
-													{
-														type: 'text',
-														text: ') It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
-													}
-												]
-											},
-											{
-												type: 'bullet_list',
-												content: [
-													{
-														type: 'list_item',
-														content: [
-															{
-																type: 'paragraph',
-																attrs: {
-																	align: null
-																},
-																content: [
-																	{
-																		type: 'text',
-																		text: '('
-																	},
-																	{
-																		type: 'text',
-																		marks: [
-																			{
-																				type: 'strong'
-																			}
-																		],
-																		text: 'depth 2'
-																	},
-																	{
-																		type: 'text',
-																		text: ') The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.'
-																	}
-																]
-															}
-														]
-													}
-												]
-											}
-										]
-									}
-								]
-							}
-						]
-					},
-					{
-						type: 'list_item',
-						content: [
-							{
-								type: 'paragraph',
-								attrs: {
-									align: null
-								},
-								content: [
-									{
-										type: 'text',
-										text: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable"
-									}
-								]
-							}
-						]
-					},
-					{
-						type: 'list_item',
-						content: [
-							{
-								type: 'paragraph',
-								attrs: {
-									align: null
-								},
-								content: [
-									{
-										type: 'text',
-										text: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.'
-									}
-								]
-							}
-						]
-					}
-				]
-			},
-			{
-				type: 'heading',
-				attrs: {
-					level: 4,
-					align: null
-				},
-				content: [
-					{
-						type: 'text',
-						text: 'Ordered List'
-					}
-				]
-			},
-			{
-				type: 'ordered_list',
-				attrs: {
-					order: 1
-				},
-				content: [
-					{
-						type: 'list_item',
-						content: [
-							{
-								type: 'paragraph',
-								attrs: {
-									align: null
-								},
-								content: [
-									{
-										type: 'text',
-										marks: [
-											{
-												type: 'strong'
-											}
-										],
-										text: 'Lorem Ipsum'
-									},
-									{
-										type: 'text',
-										text: ' is simply dummy text of the printing and typesetting industry'
-									}
-								]
-							}
-						]
-					},
-					{
-						type: 'list_item',
-						content: [
-							{
-								type: 'paragraph',
-								attrs: {
-									align: null
-								},
-								content: [
-									{
-										type: 'text',
-										text: "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable"
-									}
-								]
-							},
-							{
-								type: 'ordered_list',
-								attrs: {
-									order: 1
-								},
-								content: [
-									{
-										type: 'list_item',
-										content: [
-											{
-												type: 'paragraph',
-												attrs: {
-													align: null
-												},
-												content: [
-													{
-														type: 'text',
-														text: '('
-													},
-													{
-														type: 'text',
-														marks: [
-															{
-																type: 'strong'
-															}
-														],
-														text: 'depth 1'
-													},
-													{
-														type: 'text',
-														text: ') It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.'
-													}
-												]
-											},
-											{
-												type: 'ordered_list',
-												attrs: {
-													order: 1
-												},
-												content: [
-													{
-														type: 'list_item',
-														content: [
-															{
-																type: 'paragraph',
-																attrs: {
-																	align: null
-																},
-																content: [
-																	{
-																		type: 'text',
-																		text: '('
-																	},
-																	{
-																		type: 'text',
-																		marks: [
-																			{
-																				type: 'strong'
-																			}
-																		],
-																		text: 'depth 2'
-																	},
-																	{
-																		type: 'text',
-																		text: ') The chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested.'
-																	}
-																]
-															}
-														]
-													}
-												]
-											}
-										]
-									}
-								]
-							}
-						]
-					},
-					{
-						type: 'list_item',
-						content: [
-							{
-								type: 'paragraph',
-								attrs: {
-									align: null
-								},
-								content: [
-									{
-										type: 'text',
-										text: 'Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.'
-									}
-								]
-							}
-						]
-					}
-				]
-			}
-		]
-	};
+export class EditorComponent implements ControlValueAccessor, MatFormFieldControl<Content>, OnDestroy {
+	static nextId = 0;
+
+	@ViewChild('editorInput') editorInput!: HTMLInputElement;
 
 	editor: Editor = new Editor();
-	toolbar: Toolbar = [
-		['bold', 'italic'],
-		['underline', 'strike'],
-		['code', 'blockquote'],
-		['ordered_list', 'bullet_list'],
-		[{ heading: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }],
-		['link', 'image'],
-		['text_color', 'background_color'],
-		['align_left', 'align_center', 'align_right', 'align_justify']
-	];
-
+	toolbar: Toolbar = TOOLBAR;
 	form = new FormGroup({
-		editorContent: new FormControl({ value: this.editorDoc, disabled: false }, Validators.required())
+		editorContent: new FormControl({ value: null, disabled: false }, Validators.required())
 	});
 
-	get doc() {
-		return this.form.get('editorContent');
+	@Input()
+	get value(): Content {
+		if (this.form.valid) {
+			const {
+				value: { editorContent }
+			} = this.form;
+			return editorContent;
+		}
+		return null;
+	}
+	set value(value: Content) {
+		this.form.setValue({ editorContent: value });
+		this.stateChanges.next();
+	}
+
+	@Input()
+	get placeholder(): string {
+		return this._placeholder;
+	}
+	set placeholder(value: string) {
+		this._placeholder = value;
+		this.stateChanges.next();
+	}
+	private _placeholder = 'Enter Text';
+
+	@Input()
+	get required(): boolean {
+		return this._required;
+	}
+	set required(value: BooleanInput) {
+		this._required = coerceBooleanProperty(value);
+		this.stateChanges.next();
+	}
+	private _required = false;
+
+	@Input()
+	get disabled(): boolean {
+		return this._disabled;
+	}
+	set disabled(value: BooleanInput) {
+		this._disabled = coerceBooleanProperty(value);
+		this._disabled ? this.form.disable() : this.form.enable();
+		this.stateChanges.next();
+	}
+	private _disabled = false;
+
+	@HostBinding('class.editor-label-floating')
+	get getEditorLabelFloatingClass() {
+		return this.shouldLabelFloat;
+	}
+	@HostBinding('class.editor-negative-margin')
+	get getEditorNegativeMarginClass() {
+		return !!this._formField;
+	}
+	@HostBinding('id')
+	get getId() {
+		return this.id;
+	}
+
+	stateChanges = new Subject<void>();
+	id = `notepad-editor-${EditorComponent.nextId++}`;
+	focused = false;
+	touched = false;
+	shouldLabelFloat = true;
+	get empty(): boolean {
+		return !this.value;
+	}
+	get errorState(): boolean {
+		return this.form.invalid && this.touched;
+	}
+	controlType = 'notepad-editor';
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
+	onChange = (_: Content) => {};
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	onTouched = () => {};
+
+	constructor(
+		private _focusMonitor: FocusMonitor,
+		private _elementRef: ElementRef<HTMLElement>,
+		@Optional() @Inject(MAT_FORM_FIELD) public _formField: MatFormField,
+		@Optional() @Self() public ngControl: NgControl | null
+	) {
+		if (this.ngControl) {
+			this.ngControl.valueAccessor = this;
+		}
+		this.form.valueChanges.pipe(map(({ editorContent = null }) => editorContent)).subscribe((value: Content) => this.onChange(value));
+	}
+
+	onFocusIn() {
+		if (!this.focused) {
+			this.focused = true;
+			this.stateChanges.next();
+		}
+	}
+
+	onFocusOut(event: FocusEvent) {
+		if (!this._elementRef.nativeElement.contains(event.relatedTarget as Element)) {
+			this.touched = true;
+			this.focused = false;
+			this.onTouched();
+			this.stateChanges.next();
+		}
+	}
+
+	setDescribedByIds(ids: string[]): void {
+		const controlElement = this._elementRef.nativeElement.querySelector('.editor-container');
+		controlElement?.setAttribute('aria-describedby', ids.join(' '));
+	}
+
+	onContainerClick(): void {
+		this._focusMonitor.focusVia(this.editorInput, 'program');
+	}
+
+	writeValue(value: Content): void {
+		this.value = value;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	registerOnChange(fn: any): void {
+		this.onChange = fn;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	registerOnTouched(fn: any): void {
+		this.onTouched = fn;
 	}
 
 	ngOnDestroy(): void {
+		this.stateChanges.complete();
+		this._focusMonitor.stopMonitoring(this._elementRef);
 		this.editor.destroy();
 	}
 }

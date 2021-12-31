@@ -2,8 +2,12 @@
 @import '~@angular/material/theming';
 @import 'state.theme';
 
-@mixin theme($theme: variables.$dark-theme, $hue: variables.$hue) {
+@mixin theme($theme: variables.$light-theme, $hue: variables.$hue) {
 	#{ variables.$joined-button-selectors } {
 		@include default-state-theme;
+		text-transform: uppercase;
+		.mat-button-wrapper > *:not(:last-child) {
+			padding-right: 0.2rem;
+		}
 	}
 }

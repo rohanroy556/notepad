@@ -8,8 +8,10 @@ body {
 body {
 	margin: 0;
 	font-family: Roboto, 'Helvetica Neue', sans-serif;
+	@include background-theme();
 	@include button-theme();
 	@include button-toggle-theme();
+	@include editor-theme();
 	@include grid-theme();
 	@include list-theme();
 	@include toolbar-theme();

@@ -34,7 +34,8 @@
 	}
 
 	@each $key, $val in $color-list {
-		&[color='#{$key}'] {
+		&[color='#{$key}'],
+		&.mat-#{$key} {
 			@include set-color($val, $default-hue);
 			&:hover {
 				@include set-color($val, $hover-hue);
@@ -47,5 +48,5 @@
 }
 
 @mixin default-state-theme {
-	@include define-states(variables.$dark-theme, variables.$hue);
+	@include define-states(variables.$light-theme, variables.$hue);
 }

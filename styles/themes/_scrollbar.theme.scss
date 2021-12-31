@@ -17,6 +17,6 @@
 	}
 	&::-webkit-scrollbar-thumb {
 		border-radius: variables.$border-radius;
-		@include define-states(variables.$dark-theme, variables.$scrollbar-hue);
+		@include define-states(variables.$light-theme, variables.$scrollbar-hue);
 	}
 }

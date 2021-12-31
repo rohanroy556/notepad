@@ -43,9 +43,9 @@
 }
 
 $primary: mat-palette($mat-blue-grey);
-$accent: mat-palette($mat-amber, A200, A100, A400);
+$accent: mat-palette($mat-amber);
 $warn: mat-palette($mat-deep-orange);
-$dark-theme: mat-dark-theme($primary, $accent, $warn);
+$light-theme: mat-light-theme($primary, $accent, $warn);
 
 $white-color: #ffffff;
 $black-color: #000000;
@@ -80,7 +80,7 @@ $toolbar-hue: (
 
 $header-height: 4rem;
 $section-height: calc(100% - #{$header-height});
-$border-radius: 0.33rem;
+$border-radius: 4px;
 
 $button-selectors: '.mat-button' '.mat-raised-button' '.mat-flat-button' '.mat-icon-button' '.mat-stroked-button' '.mat-fab' '.mat-mini-fab';
 $excluded-button-selectors: '.editor-container' '.mat-button-toggle-group';

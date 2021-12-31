@@ -1,6 +1,13 @@
-<form [formGroup]="form" class="editor-container">
+<form
+	role="group"
+	class="editor-container"
+	[formGroup]="form"
+	[attr.aria-labelledby]="_formField?.getLabelId()"
+	(focusin)="onFocusIn()"
+	(focusout)="onFocusOut($event)"
+>
 	<div class="editor">
 		<ngx-editor-menu [editor]="editor" [toolbar]="toolbar"></ngx-editor-menu>
-		<ngx-editor [editor]="editor" formControlName="editorContent"></ngx-editor>
+		<ngx-editor [editor]="editor" formControlName="editorContent" #editorInput></ngx-editor>
 	</div>
 </form>

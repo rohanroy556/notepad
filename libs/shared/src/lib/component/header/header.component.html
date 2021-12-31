@@ -1,0 +1,9 @@
+<mat-toolbar color="primary">
+	<button mat-icon-button notepadBackButton *ngIf="showBackButton" class="back">
+		<mat-icon>arrow_back</mat-icon>
+	</button>
+	<button mat-button class="title" [routerLink]="['/']">
+		<mat-icon>description</mat-icon>
+		<span *ngIf="title">{{ title }}</span>
+	</button>
+</mat-toolbar>

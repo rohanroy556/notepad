@@ -1,0 +1,14 @@
+@use 'variables';
+@import '~@angular/material/theming';
+@import 'state.theme';
+
+@mixin theme($theme: variables.$light-theme) {
+	$config: mat-get-color-config($theme);
+	$foreground: map-get($config, foreground);
+	$background: map-get($config, background);
+
+	& {
+		background-color: mat-color($background, background);
+		color: mat-color($foreground, text);
+	}
+}

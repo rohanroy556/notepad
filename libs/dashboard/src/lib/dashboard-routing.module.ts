@@ -4,11 +4,12 @@ import { DashboardComponent, NoteComponent } from './component';
 
 const routes: Routes = [
 	{ path: '', component: DashboardComponent },
-	{ path: 'note', component: NoteComponent }
+	{ path: 'note', component: NoteComponent },
+	{ path: 'note/:id', component: NoteComponent }
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
+	imports: [RouterModule.forChild(routes)],
+	exports: [RouterModule]
 })
 export class DashboardRoutingModule {}

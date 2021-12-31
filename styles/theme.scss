@@ -3,4 +3,4 @@
 @import 'themes';
 
 @include mat-core();
-@include angular-material-theme(variables.$dark-theme);
+@include angular-material-theme(variables.$light-theme);

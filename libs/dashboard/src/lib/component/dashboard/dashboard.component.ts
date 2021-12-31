@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { notes } from '../../constant/notes';
+import { NOTES } from '../../constant/notes';
 import { DisplayType, Note } from '../../model';
 
 @Component({
@@ -10,7 +10,7 @@ import { DisplayType, Note } from '../../model';
 export class DashboardComponent {
 	color = 'accent';
 	margin = '1rem';
-	notes: Array<Note> = notes;
+	notes: Array<Note> = NOTES;
 	displayType: DisplayType = this.displayTypes.Grid;
 	get displayTypes(): typeof DisplayType {
 		return DisplayType;

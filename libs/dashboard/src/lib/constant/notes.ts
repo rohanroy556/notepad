@@ -566,7 +566,7 @@ const content: Content = {
 	]
 };
 
-export const notes: Array<Note> = [...Array(100)].map((_, i) => ({
+export const NOTES: Array<Note> = [...Array(100)].map((_, i) => ({
 	_id: [...Array(authorLength)].map(() => characterPool[Math.floor(Math.random() * authorLength)]).join(''),
 	name: `Note Title ${i + 1}`,
 	author: 'rohanroy556',

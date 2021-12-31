@@ -1,0 +1,40 @@
+@use 'variables';
+@import '~@angular/material/theming';
+@import 'state.theme';
+
+@mixin theme() {
+	.editor-container {
+		background-color: variables.$white-color;
+		border-radius: variables.$border-radius;
+		overflow: auto;
+	}
+	.editor-negative-margin {
+		display: block;
+		margin: -1.25rem -0.5rem -0.75rem -0.5em;
+	}
+	.editor {
+		border-radius: variables.$border-radius;
+		color: variables.$black-color;
+		min-width: 45rem;
+
+		.NgxEditor__MenuBar {
+			border-radius: variables.$border-radius variables.$border-radius 0 0;
+			border-bottom: 1px solid variables.$primary-light-color;
+			.NgxEditor__Dropdown,
+			.NgxEditor__MenuItem {
+				position: static;
+			}
+			.NgxEditor__Dropdown--DropdownMenu {
+				width: 6rem;
+				left: auto;
+			}
+			.NgxEditor__Seperator {
+				border-bottom-color: variables.$primary-light-color;
+			}
+		}
+		.NgxEditor {
+			border-radius: 0 0 variables.$border-radius variables.$border-radius;
+			border: none;
+		}
+	}
+}
