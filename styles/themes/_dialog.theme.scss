@@ -1,0 +1,40 @@
+@use 'background.theme' as background;
+@use 'variables';
+@import '~@angular/material/theming';
+@import 'state.theme';
+
+@mixin theme($theme: variables.$light-theme, $hue: variables.$hue) {
+	$padding: 1rem;
+	.mat-dialog-container {
+		padding: 0;
+		* {
+			margin: 0;
+		}
+		.mat-dialog-title {
+			@include background.theme($theme);
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			padding: $padding;
+
+			.heading {
+				padding: 0 calc($padding / 2);
+			}
+		}
+		.mat-dialog-content {
+			padding: $padding;
+			border: 1px solid variables.$primary-light-color;
+			* {
+				padding: $padding calc($padding / 2);
+			}
+		}
+		.mat-dialog-actions {
+			@include background.theme($theme);
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			box-sizing: border-box;
+			padding: $padding;
+		}
+	}
+}

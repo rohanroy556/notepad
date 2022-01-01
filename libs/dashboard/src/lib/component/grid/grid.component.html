@@ -1,5 +1,5 @@
 <mat-grid-list [cols]="cols" [rowHeight]="rowHeight" [gutterSize]="margin" [style.margin]="margin" (window:resize)="onResize()">
-	<mat-grid-tile *ngFor="let note of notes; let i = index" [attr.color]="color" class="thin-scroll">
+	<mat-grid-tile *ngFor="let note of notes; let i = index" [attr.color]="color" (click)="onEdit(note)" class="thin-scroll">
 		<div class="content thin-scrollbar">
 			<p class="index">{{ i + 1 }})</p>
 			<div class="header">
@@ -11,7 +11,7 @@
 			</div>
 		</div>
 		<div class="actions">
-			<button mat-icon-button>
+			<button mat-icon-button (click)="onDelete($event, note)">
 				<mat-icon>delete</mat-icon>
 			</button>
 		</div>

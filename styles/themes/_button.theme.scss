@@ -9,5 +9,8 @@
 		.mat-button-wrapper > *:not(:last-child) {
 			padding-right: 0.2rem;
 		}
+		#{ variables.$joined-disabled-button-selectors } {
+			@include define-states($theme, variables.$disabled-button-hue);
+		}
 	}
 }

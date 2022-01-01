@@ -8,3 +8,5 @@ export interface Note {
 	updatedAt: Date;
 	author: string;
 }
+
+export type NoteForm = Pick<Note, 'name' | 'content'>;

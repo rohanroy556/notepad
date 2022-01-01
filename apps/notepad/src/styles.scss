@@ -11,6 +11,7 @@ body {
 	@include background-theme();
 	@include button-theme();
 	@include button-toggle-theme();
+	@include dialog-theme();
 	@include editor-theme();
 	@include grid-theme();
 	@include list-theme();

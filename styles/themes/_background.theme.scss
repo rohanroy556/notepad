@@ -1,6 +1,5 @@
 @use 'variables';
 @import '~@angular/material/theming';
-@import 'state.theme';
 
 @mixin theme($theme: variables.$light-theme) {
 	$config: mat-get-color-config($theme);

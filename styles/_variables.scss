@@ -67,6 +67,11 @@ $hue: (
 	hover: 700,
 	active: 900
 );
+$disabled-button-hue: (
+	default: 100,
+	hover: 100,
+	active: 100
+);
 $scrollbar-hue: (
 	default: 200,
 	hover: 500,
@@ -83,5 +88,6 @@ $section-height: calc(100% - #{$header-height});
 $border-radius: 4px;
 
 $button-selectors: '.mat-button' '.mat-raised-button' '.mat-flat-button' '.mat-icon-button' '.mat-stroked-button' '.mat-fab' '.mat-mini-fab';
-$excluded-button-selectors: '.editor-container' '.mat-button-toggle-group';
+$disabled-button-selectors: '&.mat-button-disabled' '&:disabled' '&[disabled]';
 $joined-button-selectors: list-join($button-selectors);
+$joined-disabled-button-selectors: list-join($disabled-button-selectors);

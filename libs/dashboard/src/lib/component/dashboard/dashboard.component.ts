@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
-import { NOTES } from '../../constant/notes';
+import { Router } from '@angular/router';
+import { ConfirmService } from '@notepad/shared';
+import { Observable } from 'rxjs';
 import { DisplayType, Note } from '../../model';
+import { NoteService } from '../../service';
 
 @Component({
 	selector: 'notepad-dashboard',
@@ -10,9 +13,23 @@ import { DisplayType, Note } from '../../model';
 export class DashboardComponent {
 	color = 'accent';
 	margin = '1rem';
-	notes: Array<Note> = NOTES;
+	notes$: Observable<Array<Note>> = this._noteService.get();
 	displayType: DisplayType = this.displayTypes.Grid;
 	get displayTypes(): typeof DisplayType {
 		return DisplayType;
+	}
+
+	constructor(private _confirmService: ConfirmService, private _noteService: NoteService, private _router: Router) {}
+
+	onAdd() {
+		this._router.navigate(['note']);
+	}
+
+	onEdit(note: Note) {
+		this._router.navigate(['note', note._id]);
+	}
+
+	onDelete(note: Note) {
+		this._confirmService.confirm().subscribe(confirm => (confirm ? this._noteService.delete(note._id) : ''));
 	}
 }

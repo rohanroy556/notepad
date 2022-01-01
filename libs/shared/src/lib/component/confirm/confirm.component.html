@@ -1,0 +1,13 @@
+<div mat-dialog-title>
+	<h2 class="heading">Confirm</h2>
+	<button mat-icon-button (click)="close()">
+		<mat-icon>close</mat-icon>
+	</button>
+</div>
+<div mat-dialog-content>
+	<p>Are you sure?</p>
+</div>
+<div mat-dialog-actions>
+	<button mat-raised-button color="accent" (click)="close(true)">Ok</button>
+	<button mat-raised-button (click)="close(false)">Cancel</button>
+</div>

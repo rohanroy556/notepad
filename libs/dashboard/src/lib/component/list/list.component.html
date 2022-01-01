@@ -1,5 +1,5 @@
 <mat-list [style.margin]="margin">
-	<mat-list-item *ngFor="let note of notes; let i = index" [attr.color]="color">
+	<mat-list-item *ngFor="let note of notes; let i = index" [attr.color]="color" (click)="onEdit(note)">
 		<p class="index">{{ i + 1 }})</p>
 		<div class="content thin-scrollbar">
 			<h2 class="title thin-scrollbar">{{ note.name }}</h2>
@@ -9,7 +9,7 @@
 			</p>
 		</div>
 		<div class="actions">
-			<button mat-icon-button>
+			<button mat-icon-button (click)="onDelete($event, note)">
 				<mat-icon>delete</mat-icon>
 			</button>
 		</div>

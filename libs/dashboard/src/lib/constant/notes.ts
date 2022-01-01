@@ -566,11 +566,17 @@ const content: Content = {
 	]
 };
 
-export const NOTES: Array<Note> = [...Array(100)].map((_, i) => ({
-	_id: [...Array(authorLength)].map(() => characterPool[Math.floor(Math.random() * authorLength)]).join(''),
+const notes = [...Array(100)].map((_, i) => ({
+	_id: generateId(),
 	name: `Note Title ${i + 1}`,
 	author: 'rohanroy556',
 	content,
 	createdAt: new Date(1609459200000 + 3600000 * i),
 	updatedAt: new Date(1609545600000 + 3600000 * i)
 }));
+
+export function generateId() {
+	return [...Array(authorLength)].map(() => characterPool[Math.floor(Math.random() * authorLength)]).join('');
+}
+
+export const NOTES: Array<Note> = notes;

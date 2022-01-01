@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Note } from '../../model';
 
 @Component({
@@ -10,4 +10,15 @@ export class ListComponent {
 	@Input() color = 'accent';
 	@Input() margin = '1rem';
 	@Input() notes: Array<Note> = [];
+	@Output() edit: EventEmitter<Note> = new EventEmitter<Note>();
+	@Output() delete: EventEmitter<Note> = new EventEmitter<Note>();
+
+	onEdit(note: Note) {
+		this.edit.emit(note);
+	}
+
+	onDelete($event: MouseEvent | TouchEvent, note: Note) {
+		$event.stopPropagation();
+		this.delete.emit(note);
+	}
 }
