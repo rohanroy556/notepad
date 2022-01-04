@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Validators } from 'ngx-editor';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
-import { NoteForm } from '../../model';
+import { NoteForm, OnDeactivate } from '@notepad/api-interfaces';
 import { NoteService } from '../../service';
 
 @Component({
@@ -11,7 +11,7 @@ import { NoteService } from '../../service';
 	templateUrl: './note.component.html',
 	styleUrls: ['./note.component.scss']
 })
-export class NoteComponent implements OnInit {
+export class NoteComponent implements OnInit, OnDeactivate {
 	readonly nameMinLength = 3;
 	readonly nameMaxLength = 50;
 
@@ -53,6 +53,10 @@ export class NoteComponent implements OnInit {
 				return of(true);
 			})
 		);
+	}
+
+	onDeactivate(): boolean {
+		return !this.noteForm.dirty;
 	}
 
 	noteChange(): void {

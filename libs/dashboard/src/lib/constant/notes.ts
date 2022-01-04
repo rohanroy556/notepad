@@ -1,5 +1,5 @@
 import { Content } from '@notepad/editor';
-import { Note } from '../model';
+import { Note } from '@notepad/api-interfaces';
 
 const characterPool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789',
 	authorLength = 24;

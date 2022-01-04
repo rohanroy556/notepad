@@ -1,8 +1,8 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Note, NoteForm } from '@notepad/api-interfaces';
 import { Observable, of, throwError } from 'rxjs';
 import { generateId, NOTES } from '../constant/notes';
-import { Note, NoteForm } from '../model';
 
 @Injectable({
 	providedIn: 'root'

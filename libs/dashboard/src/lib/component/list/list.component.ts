@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Note } from '../../model';
+import { Note } from '@notepad/api-interfaces';
 
 @Component({
 	selector: 'notepad-list',
