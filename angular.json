@@ -53,21 +53,6 @@
 			},
 			"tags": []
 		},
-		"api-interfaces": {
-			"root": "libs/api-interfaces",
-			"sourceRoot": "libs/api-interfaces/src",
-			"projectType": "library",
-			"architect": {
-				"lint": {
-					"builder": "@nrwl/linter:eslint",
-					"outputs": ["{options.outputFile}"],
-					"options": {
-						"lintFilePatterns": ["libs/api-interfaces/**/*.ts"]
-					}
-				}
-			},
-			"tags": []
-		},
 		"dashboard": {
 			"projectType": "library",
 			"root": "libs/dashboard",
@@ -86,6 +71,40 @@
 					"builder": "@nrwl/linter:eslint",
 					"options": {
 						"lintFilePatterns": ["libs/dashboard/src/**/*.ts", "libs/dashboard/src/**/*.html"]
+					}
+				}
+			},
+			"tags": []
+		},
+		"database": {
+			"root": "libs/database",
+			"sourceRoot": "libs/database/src",
+			"projectType": "library",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:package",
+					"outputs": ["{options.outputPath}"],
+					"options": {
+						"outputPath": "dist/libs/database",
+						"tsConfig": "libs/database/tsconfig.lib.json",
+						"packageJson": "libs/database/package.json",
+						"main": "libs/database/src/index.ts",
+						"assets": ["libs/database/*.md"]
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"outputs": ["{options.outputFile}"],
+					"options": {
+						"lintFilePatterns": ["libs/database/**/*.ts"]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/libs/database"],
+					"options": {
+						"jestConfig": "libs/database/jest.config.js",
+						"passWithNoTests": true
 					}
 				}
 			},
@@ -132,6 +151,21 @@
 					"builder": "@nrwl/linter:eslint",
 					"options": {
 						"lintFilePatterns": ["libs/material/src/**/*.ts", "libs/material/src/**/*.html"]
+					}
+				}
+			},
+			"tags": []
+		},
+		"models": {
+			"root": "libs/models",
+			"sourceRoot": "libs/models/src",
+			"projectType": "library",
+			"architect": {
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"outputs": ["{options.outputFile}"],
+					"options": {
+						"lintFilePatterns": ["libs/models/**/*.ts"]
 					}
 				}
 			},

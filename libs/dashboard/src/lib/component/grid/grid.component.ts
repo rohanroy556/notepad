@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Note } from '@notepad/api-interfaces';
+import { Note } from '@notepad/models';
 
 @Component({
 	selector: 'notepad-grid',

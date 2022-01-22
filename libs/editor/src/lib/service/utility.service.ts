@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { JSONDoc } from '@notepad/models';
 import { toDoc, toHTML } from 'ngx-editor';
-import { JSONDoc } from '../model';
 
 @Injectable({
 	providedIn: 'root'

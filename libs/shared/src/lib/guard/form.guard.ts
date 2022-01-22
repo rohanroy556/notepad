@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { CanDeactivate, UrlTree } from '@angular/router';
-import { OnDeactivate } from '@notepad/api-interfaces';
+import { OnDeactivate } from '@notepad/models';
 import { Observable } from 'rxjs';
 import { ConfirmService } from '../service';
 

@@ -3,10 +3,10 @@ import { BooleanInput, coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Component, ElementRef, HostBinding, Inject, Input, OnDestroy, Optional, Self, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, ControlValueAccessor, NgControl } from '@angular/forms';
 import { MatFormField, MatFormFieldControl, MAT_FORM_FIELD } from '@angular/material/form-field';
+import { Content } from '@notepad/models';
 import { Editor, Toolbar, Validators } from 'ngx-editor';
 import { map, Subject } from 'rxjs';
 import { TOOLBAR } from '../../configuration';
-import { Content } from '../../model';
 
 @Component({
 	selector: 'notepad-editor',

@@ -1,4 +1,4 @@
-import { Content } from '@notepad/editor';
+import { Content } from "./content";
 
 export interface Note {
 	_id: string;
@@ -9,4 +9,4 @@ export interface Note {
 	author: string;
 }
 
-export type NoteForm = Pick<Note, 'name' | 'content'>;
+export type NoteData = Pick<Note, 'name' | 'content'>;

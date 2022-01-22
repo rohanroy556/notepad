@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { DisplayType, Note } from '@notepad/api-interfaces';
+import { DisplayType, Note } from '@notepad/models';
 import { ConfirmService } from '@notepad/shared';
 import { Observable } from 'rxjs';
 import { NoteService } from '../../service';
