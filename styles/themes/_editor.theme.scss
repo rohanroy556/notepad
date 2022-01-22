@@ -15,11 +15,12 @@
 	.editor {
 		border-radius: variables.$border-radius;
 		color: variables.$black-color;
-		min-width: 45rem;
 
 		.NgxEditor__MenuBar {
 			border-radius: variables.$border-radius variables.$border-radius 0 0;
 			border-bottom: 1px solid variables.$primary-light-color;
+			flex-wrap: wrap;
+
 			.NgxEditor__Dropdown,
 			.NgxEditor__MenuItem {
 				position: static;

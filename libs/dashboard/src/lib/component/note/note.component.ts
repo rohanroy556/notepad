@@ -5,6 +5,7 @@ import { Validators } from 'ngx-editor';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
 import { NoteForm, OnDeactivate } from '@notepad/api-interfaces';
 import { NoteService } from '../../service';
+import { UtilityService } from '@notepad/editor';
 
 @Component({
 	selector: 'notepad-note',
@@ -32,7 +33,8 @@ export class NoteComponent implements OnInit, OnDeactivate {
 		private _formBuilder: FormBuilder,
 		private _noteService: NoteService,
 		private _route: ActivatedRoute,
-		private _router: Router
+		private _router: Router,
+		private _utilityService: UtilityService
 	) {}
 
 	ngOnInit(): void {
@@ -88,6 +90,7 @@ export class NoteComponent implements OnInit, OnDeactivate {
 	submit(): void {
 		if (!this.noteForm.valid) return;
 		const formData = this.noteForm.getRawValue();
+		console.log(this._utilityService.convert(formData.content));
 		const note$ = this._id ? this._noteService.update(this._id, formData) : this._noteService.create(formData);
 		note$.subscribe({
 			next: () => this._router.navigate(['']),
