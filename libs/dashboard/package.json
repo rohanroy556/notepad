@@ -1,0 +1,15 @@
+{
+	"name": "@notepad/dashboard",
+	"version": "0.0.1",
+	"peerDependencies": {
+		"@angular/common": "^13.1.0",
+		"@angular/core": "^13.1.0",
+		"@angular/forms": "~13.1.0",
+		"@notepad/editor": "~0.0.1",
+		"@notepad/material": "~0.0.1",
+		"@notepad/models": "~0.0.1"
+	},
+	"dependencies": {
+		"tslib": "^2.3.0"
+	}
+}

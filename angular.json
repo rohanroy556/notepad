@@ -59,6 +59,22 @@
 			"sourceRoot": "libs/dashboard/src",
 			"prefix": "notepad",
 			"architect": {
+				"build": {
+					"builder": "@nrwl/angular:ng-packagr-lite",
+					"outputs": ["dist/libs/dashboard"],
+					"options": {
+						"project": "libs/dashboard/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "libs/dashboard/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "libs/dashboard/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
 				"test": {
 					"builder": "@nrwl/jest:jest",
 					"outputs": ["coverage/libs/dashboard"],
@@ -116,6 +132,22 @@
 			"sourceRoot": "libs/editor/src",
 			"prefix": "notepad",
 			"architect": {
+				"build": {
+					"builder": "@nrwl/angular:ng-packagr-lite",
+					"outputs": ["dist/libs/editor"],
+					"options": {
+						"project": "libs/editor/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "libs/editor/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "libs/editor/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
 				"test": {
 					"builder": "@nrwl/jest:jest",
 					"outputs": ["coverage/libs/editor"],
@@ -139,6 +171,22 @@
 			"sourceRoot": "libs/material/src",
 			"prefix": "notepad",
 			"architect": {
+				"build": {
+					"builder": "@nrwl/angular:ng-packagr-lite",
+					"outputs": ["dist/libs/material"],
+					"options": {
+						"project": "libs/material/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "libs/material/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "libs/material/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
 				"test": {
 					"builder": "@nrwl/jest:jest",
 					"outputs": ["coverage/libs/material"],
@@ -161,6 +209,16 @@
 			"sourceRoot": "libs/models/src",
 			"projectType": "library",
 			"architect": {
+				"build": {
+					"builder": "@nrwl/node:package",
+					"outputs": ["{options.outputPath}"],
+					"options": {
+						"outputPath": "dist/libs/models",
+						"tsConfig": "libs/models/tsconfig.lib.json",
+						"packageJson": "libs/models/package.json",
+						"main": "libs/models/src/index.ts"
+					}
+				},
 				"lint": {
 					"builder": "@nrwl/linter:eslint",
 					"outputs": ["{options.outputFile}"],
@@ -296,6 +354,22 @@
 			"sourceRoot": "libs/shared/src",
 			"prefix": "notepad",
 			"architect": {
+				"build": {
+					"builder": "@nrwl/angular:ng-packagr-lite",
+					"outputs": ["dist/libs/shared"],
+					"options": {
+						"project": "libs/shared/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "libs/shared/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "libs/shared/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
 				"test": {
 					"builder": "@nrwl/jest:jest",
 					"outputs": ["coverage/libs/shared"],
