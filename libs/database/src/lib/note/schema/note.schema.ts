@@ -1,24 +1,18 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Note } from '@notepad/models';
+import { Note as INote } from '@notepad/models';
 import { Content } from '@notepad/models';
 import { Document } from "mongoose";
 
-@Schema()
-export class NoteDocument extends Document implements Omit<Note, '_id'> {
+@Schema({ timestamps: true })
+export class Note extends Document implements Omit<INote, '_id' | 'createdAt' | 'updatedAt'> {
 	@Prop({ type: String, required: true })
 	name: string;
 
 	@Prop({ type: Object, required: true })
 	content: Content;
 
-	@Prop({ type: Date, required: true })
-	createdAt: Date;
-
-	@Prop({ type: Date, required: true })
-	updatedAt: Date;
-
 	@Prop({ type: String, required: true })
 	author: string;
 }
 
-export const NoteSchema = SchemaFactory.createForClass(NoteDocument);
+export const NoteSchema = SchemaFactory.createForClass(Note);

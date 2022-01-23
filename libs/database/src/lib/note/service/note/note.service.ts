@@ -1,32 +1,32 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Note, NoteDto } from '@notepad/models';
+import { Note as INote, NoteDto } from '@notepad/models';
 import { DeleteResult } from 'mongodb';
 import { Model } from 'mongoose';
-import { NoteDocument } from '../../schema';
+import { Note } from '../../schema';
 
 @Injectable()
 export class NoteService {
-	constructor(@InjectModel(NoteDocument.name) private _noteModel: Model<NoteDocument>) {}
+	constructor(@InjectModel(Note.name) private _noteModel: Model<INote>) {}
 
-	create(noteDto: NoteDto): Promise<Note> {
-		const note = new this._noteModel({ ...noteDto, createdAt: new Date(), updatedAt: new Date(), author: 'rohanroy556' });
+	create(noteDto: NoteDto): Promise<INote> {
+		const note = new this._noteModel({ ...noteDto, author: 'rohanroy556' });
 		return note.save();
 	}
 
-	update(id: string, noteDto: NoteDto): Promise<Note> {
-		return this._noteModel.findByIdAndUpdate(id, { $set: { ...noteDto, updatedAt: new Date() } }).exec();
+	update(id: string, noteDto: NoteDto): Promise<INote> {
+		return this._noteModel.findByIdAndUpdate(id, { $set: noteDto }).exec();
 	}
 
-	find(): Promise<Array<Note>> {
+	find(): Promise<Array<INote>> {
 		return this._noteModel.find().exec();
 	}
 
-	findByAuthor(author: string): Promise<Array<Note>> {
+	findByAuthor(author: string): Promise<Array<INote>> {
 		return this._noteModel.find({ author }).exec();
 	}
 
-	findById(id: string): Promise<Note> {
+	findById(id: string): Promise<INote> {
 		return this._noteModel.findById(id).exec();
 	}
 

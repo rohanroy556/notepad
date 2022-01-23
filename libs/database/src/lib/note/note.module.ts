@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
-import { NoteDocument, NoteSchema } from './schema';
+import { Note, NoteSchema } from './schema';
 import { NoteService } from './service';
 
 @Module({
 	imports: [
 		MongooseModule.forFeature([
-			{ name: NoteDocument.name, schema: NoteSchema }
+			{ name: Note.name, schema: NoteSchema }
 		])
 	],
 	providers: [NoteService],
