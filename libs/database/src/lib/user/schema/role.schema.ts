@@ -1,15 +1,15 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { ActionType, Role as IRole, RoleType } from '@notepad/models';
 import { Document } from "mongoose";
-import { Access, AccessSchema } from './access.schema';
+import { Permission, PermissionSchema } from './permission.schema';
 
 @Schema({ timestamps: true })
 export class Role extends Document implements IRole {
-	@Prop({ type: String, required: true, enum: RoleType })
+	@Prop({ type: String, required: true, unique: true, enum: RoleType })
 	name: RoleType;
 
-	@Prop({ type: AccessSchema, required: true, enum: ActionType })
-	accesses: Array<Access>;
+	@Prop({ type: PermissionSchema, required: true, enum: ActionType })
+	permissions: Array<Permission>;
 }
 
 export const RoleSchema = SchemaFactory.createForClass(Role);

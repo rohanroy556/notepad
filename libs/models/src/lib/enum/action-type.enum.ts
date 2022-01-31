@@ -1,4 +1,6 @@
 export enum ActionType {
+	Create = 'Create',
 	Read = 'Read',
-	ReadWrite = 'ReadWrite'
+	Update = 'Update',
+	Delete = 'Delete'
 }

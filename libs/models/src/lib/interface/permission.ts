@@ -1,6 +1,7 @@
 import { ActionType, FeatureType } from "../enum";
 
-export interface Access {
+export interface Permission {
 	feature: FeatureType;
 	action: ActionType;
+	condition: unknown
 }

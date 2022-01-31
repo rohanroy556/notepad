@@ -6,7 +6,7 @@ import { Note } from '../../note/schema';
 import { Role } from './role.schema';
 
 @Schema({ timestamps: true })
-export class User extends Document implements IUser {
+export class User extends Document implements Omit<IUser, '_id' | 'createdAt' | 'updatedAt'> {
 	@Prop({ type: String, required: true })
 	name: string;
 
