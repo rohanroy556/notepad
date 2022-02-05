@@ -18,7 +18,6 @@
 			"@notepad/dashboard": ["libs/dashboard/src/index.ts"],
 			"@notepad/database": ["libs/database/src/index.ts"],
 			"@notepad/editor": ["libs/editor/src/index.ts"],
-			"@notepad/logic-processor": ["libs/logic-processor/src/index.ts"],
 			"@notepad/material": ["libs/material/src/index.ts"],
 			"@notepad/models": ["libs/models/src/index.ts"],
 			"@notepad/shared": ["libs/shared/src/index.ts"]

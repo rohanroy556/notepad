@@ -165,40 +165,6 @@
 			},
 			"tags": []
 		},
-		"logic-processor": {
-			"root": "libs/logic-processor",
-			"sourceRoot": "libs/logic-processor/src",
-			"projectType": "library",
-			"architect": {
-				"build": {
-					"builder": "@nrwl/node:package",
-					"outputs": ["{options.outputPath}"],
-					"options": {
-						"outputPath": "dist/libs/logic-processor",
-						"tsConfig": "libs/logic-processor/tsconfig.lib.json",
-						"packageJson": "libs/logic-processor/package.json",
-						"main": "libs/logic-processor/src/index.ts",
-						"assets": ["libs/logic-processor/*.md"]
-					}
-				},
-				"lint": {
-					"builder": "@nrwl/linter:eslint",
-					"outputs": ["{options.outputFile}"],
-					"options": {
-						"lintFilePatterns": ["libs/logic-processor/**/*.ts"]
-					}
-				},
-				"test": {
-					"builder": "@nrwl/jest:jest",
-					"outputs": ["coverage/libs/logic-processor"],
-					"options": {
-						"jestConfig": "libs/logic-processor/jest.config.js",
-						"passWithNoTests": true
-					}
-				}
-			},
-			"tags": []
-		},
 		"material": {
 			"projectType": "library",
 			"root": "libs/material",
