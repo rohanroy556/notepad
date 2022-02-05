@@ -6,7 +6,10 @@ import { Note } from '../../note/schema';
 import { Role } from './role.schema';
 
 @Schema({ timestamps: true })
-export class User extends Document implements Omit<IUser, '_id' | 'createdAt' | 'updatedAt'> {
+export class User extends Document implements IUser {
+	@Prop({ type: Types.ObjectId, required: false })
+	_id: string;
+
 	@Prop({ type: String, required: true })
 	name: string;
 
@@ -14,16 +17,22 @@ export class User extends Document implements Omit<IUser, '_id' | 'createdAt' | 
 	email: string;
 
 	@Prop({ type: String, required: true, select: false, set: function(password: string) { return bcrypt.hashSync(password, 20); } })
-	password: string;
+	password?: string;
 
 	@Prop({ type: Boolean, required: true })
 	enabled: boolean;
 
-	@Prop({ type: Date })
+	@Prop({ type: Date, required: false })
 	lastLogin: Date;
 
-	@Prop({ type: Types.ObjectId, ref: Role.name, required: true })
+	@Prop({ type: Types.ObjectId, ref: Role.name, required: true, autopopulate: true })
 	role: Role;
+
+	@Prop({ type: Date, required: false })
+	createdAt: Date;
+
+	@Prop({ type: Date, required: false })
+	updatedAt: Date;
 
 	validatePassword: (password: string) => boolean;
 }

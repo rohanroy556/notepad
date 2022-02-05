@@ -1,10 +1,9 @@
-import { ActionType, FeatureType } from '@notepad/models';
+import { PaginateOptions } from 'mongoose';
 import { join } from 'path';
 
-function toArray<T>(obj: T): string[] {
-	return Object.keys(obj).filter(key => !isNaN(Number(key))).map(key => obj[key]);
-}
-
 export const NOTEPAD_BUILD_PATH = join(__dirname, '../notepad');
-export const ACTIONS = toArray(ActionType);
-export const FEATURES = toArray(FeatureType);
+export const DEFAULT_PAGINATE_OPTIONS: PaginateOptions = {
+	offset: 0,
+	page: 1,
+	limit: 25
+};

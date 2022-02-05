@@ -1,9 +1,8 @@
-import { ACTIONS, FEATURES, NOTEPAD_BUILD_PATH } from './constant';
+import { DEFAULT_PAGINATE_OPTIONS, NOTEPAD_BUILD_PATH } from './constant';
 import { DatabaseConnection } from './database-connection';
 
 export default () => Object.freeze({
 	NOTEPAD_BUILD_PATH,
-	ACTIONS,
-	FEATURES,
+	DEFAULT_PAGINATE_OPTIONS,
 	DATABASE: DatabaseConnection
 });

@@ -1,32 +1,38 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
-import { Note as INote, NoteDto } from '@notepad/models';
+import { NoteDto } from '@notepad/models';
 import { DeleteResult } from 'mongodb';
-import { Model } from 'mongoose';
+import { PaginateModel, PaginateOptions, PaginateResult } from 'mongoose';
 import { Note } from '../../schema';
 
 @Injectable()
 export class NoteService {
-	constructor(@InjectModel(Note.name) private _noteModel: Model<INote>) {}
+	private readonly DEFAULT_PAGINATE_OPTIONS: PaginateOptions = this._configService.get('DEFAULT_PAGINATE_OPTIONS');
 
-	create(noteDto: NoteDto): Promise<INote> {
+	constructor(
+		private readonly _configService: ConfigService,
+		@InjectModel(Note.name) private readonly _noteModel: PaginateModel<Note>
+	) {}
+
+	create(noteDto: NoteDto): Promise<Note> {
 		const note = new this._noteModel({ ...noteDto, author: 'rohanroy556' });
 		return note.save();
 	}
 
-	update(id: string, noteDto: NoteDto): Promise<INote> {
+	update(id: string, noteDto: NoteDto): Promise<Note> {
 		return this._noteModel.findByIdAndUpdate(id, { $set: noteDto }).exec();
 	}
 
-	find(): Promise<Array<INote>> {
-		return this._noteModel.find().exec();
+	find(query = {}, options: PaginateOptions = {}): Promise<PaginateResult<Note>> {
+		options.limit = Number(options.limit) >= 1 ? Number(options.limit) : this.DEFAULT_PAGINATE_OPTIONS.limit;
+		options.page = Number(options.page) >= 1 ? Number(options.page) : this.DEFAULT_PAGINATE_OPTIONS.page;
+		options.select = options.select || { password: 0, role: 0 };
+		options.sort = options.sort || { name: 1 };
+		return this._noteModel.paginate(query, options);
 	}
 
-	findByAuthor(author: string): Promise<Array<INote>> {
-		return this._noteModel.find({ author }).exec();
-	}
-
-	findById(id: string): Promise<INote> {
+	findById(id: string): Promise<Note> {
 		return this._noteModel.findById(id).exec();
 	}
 

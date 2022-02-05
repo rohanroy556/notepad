@@ -1,7 +1,8 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
-import * as mongooseAutopopulate from 'mongoose-autopopulate'
+import * as mongooseAutopopulate from 'mongoose-autopopulate';
+import * as mongoosePaginate from 'mongoose-paginate';
 import { NoteModule } from './note';
 import { SeedModule } from './seed';
 import { UserModule } from './user';
@@ -20,6 +21,7 @@ import { UserModule } from './user';
         w: 'majority',
 				connectionFactory: connection => {
 					connection.plugin(mongooseAutopopulate);
+					connection.plugin(mongoosePaginate);
 					return connection;
 				}
       }),
