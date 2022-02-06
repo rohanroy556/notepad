@@ -1,6 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Note, NoteData } from '@notepad/models';
+import { Note, NoteDto } from '@notepad/models';
 import { Observable, of, throwError } from 'rxjs';
 import { generateId, NOTES } from '../constant/notes';
 
@@ -20,13 +20,13 @@ export class NoteService {
 		return note ? of(note) : throwError(() => new HttpErrorResponse({ error: 'Note not found', status: 404, statusText: 'Not Found' }));
 	}
 
-	create(form: NoteData): Observable<Note> {
+	create(form: NoteDto): Observable<Note> {
 		const note: Note = { ...form, _id: generateId(), author: 'rohanroy556', createdAt: new Date(), updatedAt: new Date() };
 		NOTES.push(note);
 		return of(note);
 	}
 
-	update(id: string, form: NoteData): Observable<Note> {
+	update(id: string, form: NoteDto): Observable<Note> {
 		const i = NOTES.findIndex(note => note._id === id);
 		if (i < 0) {
 			return throwError(() => new HttpErrorResponse({ error: `Note doesn't exist`, status: 400, statusText: 'Bad Request' }));

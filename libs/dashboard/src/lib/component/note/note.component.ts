@@ -3,7 +3,7 @@ import { AbstractControl, FormBuilder } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Validators } from 'ngx-editor';
 import { catchError, map, Observable, of, switchMap } from 'rxjs';
-import { NoteData, OnDeactivate } from '@notepad/models';
+import { NoteDto, OnDeactivate } from '@notepad/models';
 import { NoteService } from '../../service';
 import { UtilityService } from '@notepad/editor';
 
@@ -17,7 +17,7 @@ export class NoteComponent implements OnInit, OnDeactivate {
 	readonly nameMaxLength = 50;
 
 	private _id = '';
-	note: NoteData = { name: '', content: null };
+	note: NoteDto = { name: '', content: null };
 	color = 'accent';
 	noteForm = this._formBuilder.group({});
 	show$: Observable<boolean> = of(false);

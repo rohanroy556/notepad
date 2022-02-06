@@ -3,12 +3,12 @@ import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { UserDto } from '@notepad/models';
 import { DeleteResult } from 'mongodb';
-import { PaginateModel, PaginateOptions, PaginateResult } from 'mongoose';
+import { FilterQuery, PaginateModel, PaginateOptions, PaginateResult } from 'mongoose';
 import { User } from '../../schema';
 
 @Injectable()
 export class UserService {
-	private readonly DEFAULT_PAGINATE_OPTIONS: PaginateOptions = this._configService.get('DEFAULT_PAGINATE_OPTIONS');
+	private readonly _DEFAULT_PAGINATE_OPTIONS: PaginateOptions = this._configService.get('DEFAULT_PAGINATE_OPTIONS');
 
 	constructor(
 		private readonly _configService: ConfigService,
@@ -24,12 +24,20 @@ export class UserService {
 		return this._userModel.findByIdAndUpdate(id, { $set: userDto }).exec();
 	}
 
-	find(query = {}, options: PaginateOptions = {}): Promise<PaginateResult<User>> {
-		options.limit = Number(options.limit) >= 1 ? Number(options.limit) : this.DEFAULT_PAGINATE_OPTIONS.limit;
-		options.page = Number(options.page) >= 1 ? Number(options.page) : this.DEFAULT_PAGINATE_OPTIONS.page;
+	count(query: FilterQuery<User> = {}): Promise<number> {
+		return this._userModel.countDocuments(query).exec();
+	}
+
+	find(query: FilterQuery<User> = {}, options: PaginateOptions = {}): Promise<PaginateResult<User>> {
+		options.limit = Number(options.limit) >= 1 ? Number(options.limit) : this._DEFAULT_PAGINATE_OPTIONS.limit;
+		options.page = Number(options.page) >= 1 ? Number(options.page) : this._DEFAULT_PAGINATE_OPTIONS.page;
 		options.select = options.select || { password: 0, role: 0 };
 		options.sort = options.sort || { name: 1 };
 		return this._userModel.paginate(query, options);
+	}
+
+	findByEmail(email: string): Promise<User> {
+		return this._userModel.findOne({ email }).exec();
 	}
 
 	findById(id: string): Promise<User> {

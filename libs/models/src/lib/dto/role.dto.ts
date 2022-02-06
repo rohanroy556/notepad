@@ -1,7 +1,7 @@
 import { RoleType } from "../enum";
-import { Permission, Role } from "../interface";
+import { Role } from "../interface";
 
-export class RoleDto implements Role {
+export class RoleDto implements Pick<Role, 'name'> {
 	readonly name!: RoleType;
-	readonly permissions!: Permission[];
+	readonly permissions!: ReadonlyArray<string>;
 }

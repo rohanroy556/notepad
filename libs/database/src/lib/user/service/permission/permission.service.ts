@@ -3,12 +3,12 @@ import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { PermissionDto } from '@notepad/models';
 import { DeleteResult } from 'mongodb';
-import { PaginateModel, PaginateOptions, PaginateResult } from 'mongoose';
+import { FilterQuery, PaginateModel, PaginateOptions, PaginateResult } from 'mongoose';
 import { Permission } from '../../schema';
 
 @Injectable()
 export class PermissionService {
-	private readonly DEFAULT_PAGINATE_OPTIONS: PaginateOptions = this._configService.get('DEFAULT_PAGINATE_OPTIONS');
+	private readonly _DEFAULT_PAGINATE_OPTIONS: PaginateOptions = this._configService.get('DEFAULT_PAGINATE_OPTIONS');
 
 	constructor(
 		private readonly _configService: ConfigService,
@@ -24,9 +24,13 @@ export class PermissionService {
 		return this._permissionModel.findByIdAndUpdate(id, { $set: permissionDto }).exec();
 	}
 
-	find(query = {}, options: PaginateOptions = {}): Promise<PaginateResult<Permission>> {
-		options.limit = Number(options.limit) >= 1 ? Number(options.limit) : this.DEFAULT_PAGINATE_OPTIONS.limit;
-		options.page = Number(options.page) >= 1 ? Number(options.page) : this.DEFAULT_PAGINATE_OPTIONS.page;
+	count(query: FilterQuery<Permission> = {}): Promise<number> {
+		return this._permissionModel.countDocuments(query).exec();
+	}
+
+	find(query: FilterQuery<Permission> = {}, options: PaginateOptions = {}): Promise<PaginateResult<Permission>> {
+		options.limit = Number(options.limit) >= 1 ? Number(options.limit) : this._DEFAULT_PAGINATE_OPTIONS.limit;
+		options.page = Number(options.page) >= 1 ? Number(options.page) : this._DEFAULT_PAGINATE_OPTIONS.page;
 		options.select = options.select || { condition: 0 };
 		options.sort = options.sort || { feature: 1, action: 1 };
 		return this._permissionModel.paginate(query, options);

@@ -14,11 +14,11 @@ export class Permission extends Document implements IPermission {
 	@Prop({ type: Object, required: true })
 	condition: JsonLogic.RulesLogic;
 
-	checkCondition: <T>(data: T) => boolean;
+	checkCondition: <U, R>(user: U, resource: R) => boolean;
 }
 
 export const PermissionSchema = SchemaFactory.createForClass(Permission);
 
-PermissionSchema.methods.checkCondition = function <T>(data: T): boolean {
-	return !!JsonLogic.apply(this.condition, data);
+PermissionSchema.methods.checkCondition = function <U, R>(user: U, resource: R): boolean {
+	return !!JsonLogic.apply(this.condition, { user, resource });
 }

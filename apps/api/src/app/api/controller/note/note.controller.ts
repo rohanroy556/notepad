@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common'
 import { NoteService } from '@notepad/database';
 import { Note, NoteDto } from '@notepad/models';
 import { DeleteResult } from 'mongodb';
+import { PaginateResult } from 'mongoose';
 
 @Controller('note')
 export class NoteController {
@@ -18,7 +19,7 @@ export class NoteController {
 	}
 
 	@Get()
-	get(): Promise<Array<Note>> {
+	get(): Promise<PaginateResult<Note>> {
 		return this._noteService.find();
 	}
 

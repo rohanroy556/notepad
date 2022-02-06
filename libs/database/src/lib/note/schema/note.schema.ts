@@ -2,6 +2,7 @@ import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Note as INote } from '@notepad/models';
 import { Content } from '@notepad/models';
 import { Document, Types } from "mongoose";
+import { User } from '../../user/schema';
 
 @Schema({ timestamps: true })
 export class Note extends Document implements INote {
@@ -14,7 +15,7 @@ export class Note extends Document implements INote {
 	@Prop({ type: Object, required: true })
 	content: Content;
 
-	@Prop({ type: String, required: true })
+	@Prop({ type: Types.ObjectId, ref: User.name, required: true })
 	author: string;
 
 	@Prop({ type: Date, required: false })

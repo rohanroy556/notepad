@@ -33,6 +33,6 @@ import { UserModule } from './user';
   ],
 	controllers: [],
 	providers: [],
-	exports: [NoteModule]
+	exports: [NoteModule, UserModule]
 })
 export class DatabaseModule {}
