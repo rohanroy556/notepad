@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 
 @Controller()
-export class AppController {
+export class FeatureController {
 
 	@Get('')
 	getData(): string {

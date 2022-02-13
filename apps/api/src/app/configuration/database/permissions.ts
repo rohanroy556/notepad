@@ -7,7 +7,7 @@ export const PERMISSIONS: ReadonlyArray<PermissionDto> = [
 		condition: {
 			'==': [
 				{ 'var': 'user.role.name' },
-				RoleType.Admin
+				RoleType.ADMIN
 			]
 		}
 	},
@@ -17,7 +17,7 @@ export const PERMISSIONS: ReadonlyArray<PermissionDto> = [
 		condition: {
 			'==': [
 				{ 'var': 'user.role.name' },
-				RoleType.Admin
+				RoleType.ADMIN
 			]
 		}
 	},
@@ -29,7 +29,7 @@ export const PERMISSIONS: ReadonlyArray<PermissionDto> = [
 				{
 					'==': [
 						{ 'var': 'user.role.name' },
-						RoleType.Admin
+						RoleType.ADMIN
 					]
 				},
 				{
@@ -52,7 +52,7 @@ export const PERMISSIONS: ReadonlyArray<PermissionDto> = [
 		condition: {
 			'==': [
 				{ 'var': 'user.role.name' },
-				RoleType.Admin
+				RoleType.ADMIN
 			]
 		}
 	},
@@ -62,7 +62,7 @@ export const PERMISSIONS: ReadonlyArray<PermissionDto> = [
 		condition: {
 			'==': [
 				{ 'var': 'user.role.name' },
-				RoleType.Admin
+				RoleType.ADMIN
 			]
 		}
 	},
@@ -72,7 +72,7 @@ export const PERMISSIONS: ReadonlyArray<PermissionDto> = [
 		condition: {
 			'==': [
 				{ 'var': 'user.role.name' },
-				RoleType.Admin
+				RoleType.ADMIN
 			]
 		}
 	},
@@ -84,7 +84,7 @@ export const PERMISSIONS: ReadonlyArray<PermissionDto> = [
 				{
 					'==': [
 						{ 'var': 'user.role.name' },
-						RoleType.Admin
+						RoleType.ADMIN
 					]
 				},
 				{
@@ -102,7 +102,7 @@ export const PERMISSIONS: ReadonlyArray<PermissionDto> = [
 		condition: {
 			'==': [
 				{ 'var': 'user.role.name' },
-				RoleType.Admin
+				RoleType.ADMIN
 			]
 		}
 	},
@@ -119,7 +119,7 @@ export const PERMISSIONS: ReadonlyArray<PermissionDto> = [
 				{
 					'==': [
 						{ 'var': 'user.role.name' },
-						RoleType.Admin
+						RoleType.ADMIN
 					]
 				},
 				{
@@ -139,7 +139,7 @@ export const PERMISSIONS: ReadonlyArray<PermissionDto> = [
 				{
 					'==': [
 						{ 'var': 'user.role.name' },
-						RoleType.Admin
+						RoleType.ADMIN
 					]
 				},
 				{
@@ -159,7 +159,7 @@ export const PERMISSIONS: ReadonlyArray<PermissionDto> = [
 				{
 					'==': [
 						{ 'var': 'user.role.name' },
-						RoleType.Admin
+						RoleType.ADMIN
 					]
 				},
 				{

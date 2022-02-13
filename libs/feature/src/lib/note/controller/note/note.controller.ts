@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { NoteService } from '@notepad/database';
-import { Note, NoteDto } from '@notepad/models';
+import { NoteDto, Note } from '@notepad/models';
 import { DeleteResult } from 'mongodb';
 import { PaginateResult } from 'mongoose';
 
-@Controller('note')
+@Controller('')
 export class NoteController {
 	constructor(private readonly _noteService: NoteService) {}
 

@@ -7,7 +7,6 @@ import { Role } from './role.schema';
 
 @Schema({ timestamps: true })
 export class User extends Document implements IUser {
-	@Prop({ type: Types.ObjectId, required: false })
 	_id: string;
 
 	@Prop({ type: String, required: true })

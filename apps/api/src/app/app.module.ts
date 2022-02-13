@@ -1,20 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { RouterModule } from '@nestjs/core';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { ApiModule } from './api';
+import { FeatureModule } from '@notepad/feature';
 import configuration from './configuration';
 
 @Module({
   imports: [
-		ApiModule,
+		FeatureModule,
     ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
-    RouterModule.register([
-      {
-        path: 'api',
-        module: ApiModule,
-      },
-    ]),
     ServeStaticModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: (configService: ConfigService) => [{

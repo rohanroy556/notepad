@@ -165,6 +165,40 @@
 			},
 			"tags": []
 		},
+		"feature": {
+			"root": "libs/feature",
+			"sourceRoot": "libs/feature/src",
+			"projectType": "library",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:package",
+					"outputs": ["{options.outputPath}"],
+					"options": {
+						"outputPath": "dist/libs/feature",
+						"tsConfig": "libs/feature/tsconfig.lib.json",
+						"packageJson": "libs/feature/package.json",
+						"main": "libs/feature/src/index.ts",
+						"assets": ["libs/feature/*.md"]
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"outputs": ["{options.outputFile}"],
+					"options": {
+						"lintFilePatterns": ["libs/feature/**/*.ts"]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/libs/feature"],
+					"options": {
+						"jestConfig": "libs/feature/jest.config.js",
+						"passWithNoTests": true
+					}
+				}
+			},
+			"tags": []
+		},
 		"material": {
 			"projectType": "library",
 			"root": "libs/material",

@@ -2,11 +2,11 @@ import { RoleDto, RoleType } from "@notepad/models";
 
 export const ROLES: ReadonlyArray<RoleDto> = [
 	{
-		name: RoleType.Admin,
+		name: RoleType.ADMIN,
 		permissions: []
 	},
 	{
-		name: RoleType.User,
+		name: RoleType.USER,
 		permissions: []
 	}
 ];

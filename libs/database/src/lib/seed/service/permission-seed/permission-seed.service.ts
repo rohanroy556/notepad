@@ -58,6 +58,8 @@ export class PermissionSeedService {
 			} else {
 				console.log('Note Feature: Delete permission already exists!');
 			}
+
+			console.log('Note Feature: Successfully created permissions!');
 		} catch (error) {
 			console.error('Note Feature: Error creating permissions', error);
 		}
@@ -109,6 +111,8 @@ export class PermissionSeedService {
 			} else {
 				console.log('Permission Feature: Delete permission already exists!');
 			}
+
+			console.log('Permission Feature: Successfully created permissions!');
 		} catch (error) {
 			console.error('Permission Feature: Error creating permissions', error);
 		}
@@ -160,6 +164,8 @@ export class PermissionSeedService {
 			} else {
 				console.log('Role Feature: Delete permission already exists!');
 			}
+
+			console.log('Role Feature: Successfully created permissions!');
 		} catch (error) {
 			console.error('Role Feature: Error creating permissions', error);
 		}
@@ -211,6 +217,8 @@ export class PermissionSeedService {
 			} else {
 				console.log('User Feature: Delete permission already exists!');
 			}
+
+			console.log('User Feature: Successfully created permissions!');
 		} catch (error) {
 			console.error('User Feature: Error creating permissions', error);
 		}
