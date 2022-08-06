@@ -1,4 +1,4 @@
-import { ActionType, FeatureType, PermissionDto, RoleType } from "@notepad/models";
+import { ActionType, FeatureType, PermissionDto, RoleType } from "@notepad-helper/models";
 
 export const PERMISSIONS: ReadonlyArray<PermissionDto> = [
 	{

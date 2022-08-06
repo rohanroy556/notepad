@@ -1,4 +1,4 @@
-import { UserDto } from "@notepad/models";
+import { UserDto } from "@notepad-helper/models";
 
 export const USERS: ReadonlyArray<UserDto> = [
 	{

@@ -1,4 +1,4 @@
-import { RoleDto, RoleType } from "@notepad/models";
+import { RoleDto, RoleType } from "@notepad-helper/models";
 
 export const ROLES: ReadonlyArray<RoleDto> = [
 	{

@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('@notepad/dashboard').then((m) => m.DashboardModule),
+      import('@notepad-client/dashboard').then((m) => m.DashboardModule),
   },
 ];
 

@@ -1,4 +1,4 @@
-import { DatabaseSeed } from "@notepad/models";
+import { DatabaseSeed } from "@notepad-helper/models";
 import { PERMISSIONS } from "./permissions";
 import { ROLES } from "./roles";
 import { USERS } from "./users";
