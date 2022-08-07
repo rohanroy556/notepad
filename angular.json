@@ -55,71 +55,71 @@
 		},
 		"dashboard": {
 			"projectType": "library",
-			"root": "libs/dashboard",
-			"sourceRoot": "libs/dashboard/src",
+			"root": "libs/client/dashboard",
+			"sourceRoot": "libs/client/dashboard/src",
 			"prefix": "notepad",
 			"architect": {
 				"build": {
 					"builder": "@nrwl/angular:ng-packagr-lite",
-					"outputs": ["dist/libs/dashboard"],
+					"outputs": ["dist/libs/client/dashboard"],
 					"options": {
-						"project": "libs/dashboard/ng-package.json"
+						"project": "libs/client/dashboard/ng-package.json"
 					},
 					"configurations": {
 						"production": {
-							"tsConfig": "libs/dashboard/tsconfig.lib.prod.json"
+							"tsConfig": "libs/client/dashboard/tsconfig.lib.prod.json"
 						},
 						"development": {
-							"tsConfig": "libs/dashboard/tsconfig.lib.json"
+							"tsConfig": "libs/client/dashboard/tsconfig.lib.json"
 						}
 					},
 					"defaultConfiguration": "production"
 				},
 				"test": {
 					"builder": "@nrwl/jest:jest",
-					"outputs": ["coverage/libs/dashboard"],
+					"outputs": ["coverage/libs/dashboard/client"],
 					"options": {
-						"jestConfig": "libs/dashboard/jest.config.js",
+						"jestConfig": "libs/client/dashboard/jest.config.js",
 						"passWithNoTests": true
 					}
 				},
 				"lint": {
 					"builder": "@nrwl/linter:eslint",
 					"options": {
-						"lintFilePatterns": ["libs/dashboard/src/**/*.ts", "libs/dashboard/src/**/*.html"]
+						"lintFilePatterns": ["libs/client/dashboard/src/**/*.ts", "libs/client/dashboard/src/**/*.html"]
 					}
 				}
 			},
 			"tags": []
 		},
 		"database": {
-			"root": "libs/database",
-			"sourceRoot": "libs/database/src",
+			"root": "libs/api/database",
+			"sourceRoot": "libs/api/database/src",
 			"projectType": "library",
 			"architect": {
 				"build": {
 					"builder": "@nrwl/node:package",
 					"outputs": ["{options.outputPath}"],
 					"options": {
-						"outputPath": "dist/libs/database",
-						"tsConfig": "libs/database/tsconfig.lib.json",
-						"packageJson": "libs/database/package.json",
-						"main": "libs/database/src/index.ts",
-						"assets": ["libs/database/*.md"]
+						"outputPath": "dist/libs/api/database",
+						"tsConfig": "libs/api/database/tsconfig.lib.json",
+						"packageJson": "libs/api/database/package.json",
+						"main": "libs/api/database/src/index.ts",
+						"assets": ["libs/api/database/*.md"]
 					}
 				},
 				"lint": {
 					"builder": "@nrwl/linter:eslint",
 					"outputs": ["{options.outputFile}"],
 					"options": {
-						"lintFilePatterns": ["libs/database/**/*.ts"]
+						"lintFilePatterns": ["libs/api/database/**/*.ts"]
 					}
 				},
 				"test": {
 					"builder": "@nrwl/jest:jest",
-					"outputs": ["coverage/libs/database"],
+					"outputs": ["coverage/libs/api/database"],
 					"options": {
-						"jestConfig": "libs/database/jest.config.js",
+						"jestConfig": "libs/api/database/jest.config.js",
 						"passWithNoTests": true
 					}
 				}
@@ -128,71 +128,71 @@
 		},
 		"editor": {
 			"projectType": "library",
-			"root": "libs/editor",
-			"sourceRoot": "libs/editor/src",
+			"root": "libs/client/editor",
+			"sourceRoot": "libs/client/editor/src",
 			"prefix": "notepad",
 			"architect": {
 				"build": {
 					"builder": "@nrwl/angular:ng-packagr-lite",
-					"outputs": ["dist/libs/editor"],
+					"outputs": ["dist/libs/client/editor"],
 					"options": {
-						"project": "libs/editor/ng-package.json"
+						"project": "libs/client/editor/ng-package.json"
 					},
 					"configurations": {
 						"production": {
-							"tsConfig": "libs/editor/tsconfig.lib.prod.json"
+							"tsConfig": "libs/client/editor/tsconfig.lib.prod.json"
 						},
 						"development": {
-							"tsConfig": "libs/editor/tsconfig.lib.json"
+							"tsConfig": "libs/client/editor/tsconfig.lib.json"
 						}
 					},
 					"defaultConfiguration": "production"
 				},
 				"test": {
 					"builder": "@nrwl/jest:jest",
-					"outputs": ["coverage/libs/editor"],
+					"outputs": ["coverage/libs/client/editor"],
 					"options": {
-						"jestConfig": "libs/editor/jest.config.js",
+						"jestConfig": "libs/client/editor/jest.config.js",
 						"passWithNoTests": true
 					}
 				},
 				"lint": {
 					"builder": "@nrwl/linter:eslint",
 					"options": {
-						"lintFilePatterns": ["libs/editor/src/**/*.ts", "libs/editor/src/**/*.html"]
+						"lintFilePatterns": ["libs/client/editor/src/**/*.ts", "libs/client/editor/src/**/*.html"]
 					}
 				}
 			},
 			"tags": []
 		},
 		"feature": {
-			"root": "libs/feature",
-			"sourceRoot": "libs/feature/src",
+			"root": "libs/api/feature",
+			"sourceRoot": "libs/api/feature/src",
 			"projectType": "library",
 			"architect": {
 				"build": {
 					"builder": "@nrwl/node:package",
 					"outputs": ["{options.outputPath}"],
 					"options": {
-						"outputPath": "dist/libs/feature",
-						"tsConfig": "libs/feature/tsconfig.lib.json",
-						"packageJson": "libs/feature/package.json",
-						"main": "libs/feature/src/index.ts",
-						"assets": ["libs/feature/*.md"]
+						"outputPath": "dist/libs/api/feature",
+						"tsConfig": "libs/api/feature/tsconfig.lib.json",
+						"packageJson": "libs/api/feature/package.json",
+						"main": "libs/api/feature/src/index.ts",
+						"assets": ["libs/api/feature/*.md"]
 					}
 				},
 				"lint": {
 					"builder": "@nrwl/linter:eslint",
 					"outputs": ["{options.outputFile}"],
 					"options": {
-						"lintFilePatterns": ["libs/feature/**/*.ts"]
+						"lintFilePatterns": ["libs/api/feature/**/*.ts"]
 					}
 				},
 				"test": {
 					"builder": "@nrwl/jest:jest",
-					"outputs": ["coverage/libs/feature"],
+					"outputs": ["coverage/libs/api/feature"],
 					"options": {
-						"jestConfig": "libs/feature/jest.config.js",
+						"jestConfig": "libs/api/feature/jest.config.js",
 						"passWithNoTests": true
 					}
 				}
@@ -201,56 +201,56 @@
 		},
 		"material": {
 			"projectType": "library",
-			"root": "libs/material",
-			"sourceRoot": "libs/material/src",
+			"root": "libs/client/material",
+			"sourceRoot": "libs/client/material/src",
 			"prefix": "notepad",
 			"architect": {
 				"build": {
 					"builder": "@nrwl/angular:ng-packagr-lite",
-					"outputs": ["dist/libs/material"],
+					"outputs": ["dist/libs/client/material"],
 					"options": {
-						"project": "libs/material/ng-package.json"
+						"project": "libs/client/material/ng-package.json"
 					},
 					"configurations": {
 						"production": {
-							"tsConfig": "libs/material/tsconfig.lib.prod.json"
+							"tsConfig": "libs/client/material/tsconfig.lib.prod.json"
 						},
 						"development": {
-							"tsConfig": "libs/material/tsconfig.lib.json"
+							"tsConfig": "libs/client/material/tsconfig.lib.json"
 						}
 					},
 					"defaultConfiguration": "production"
 				},
 				"test": {
 					"builder": "@nrwl/jest:jest",
-					"outputs": ["coverage/libs/material"],
+					"outputs": ["coverage/libs/client/material"],
 					"options": {
-						"jestConfig": "libs/material/jest.config.js",
+						"jestConfig": "libs/client/material/jest.config.js",
 						"passWithNoTests": true
 					}
 				},
 				"lint": {
 					"builder": "@nrwl/linter:eslint",
 					"options": {
-						"lintFilePatterns": ["libs/material/src/**/*.ts", "libs/material/src/**/*.html"]
+						"lintFilePatterns": ["libs/client/material/src/**/*.ts", "libs/client/material/src/**/*.html"]
 					}
 				}
 			},
 			"tags": []
 		},
 		"models": {
-			"root": "libs/models",
-			"sourceRoot": "libs/models/src",
+			"root": "libs/helper/models",
+			"sourceRoot": "libs/helper/models/src",
 			"projectType": "library",
 			"architect": {
 				"build": {
 					"builder": "@nrwl/node:package",
 					"outputs": ["{options.outputPath}"],
 					"options": {
-						"outputPath": "dist/libs/models",
-						"tsConfig": "libs/models/tsconfig.lib.json",
-						"packageJson": "libs/models/package.json",
-						"main": "libs/models/src/index.ts"
+						"outputPath": "dist/libs/helper/models",
+						"tsConfig": "libs/helper/models/tsconfig.lib.json",
+						"packageJson": "libs/helper/models/package.json",
+						"main": "libs/helper/models/src/index.ts"
 					}
 				},
 				"lint": {
@@ -384,38 +384,38 @@
 		},
 		"shared": {
 			"projectType": "library",
-			"root": "libs/shared",
-			"sourceRoot": "libs/shared/src",
+			"root": "libs/client/shared",
+			"sourceRoot": "libs/client/shared/src",
 			"prefix": "notepad",
 			"architect": {
 				"build": {
 					"builder": "@nrwl/angular:ng-packagr-lite",
-					"outputs": ["dist/libs/shared"],
+					"outputs": ["dist/libs/client/shared"],
 					"options": {
-						"project": "libs/shared/ng-package.json"
+						"project": "libs/client/shared/ng-package.json"
 					},
 					"configurations": {
 						"production": {
-							"tsConfig": "libs/shared/tsconfig.lib.prod.json"
+							"tsConfig": "libs/client/shared/tsconfig.lib.prod.json"
 						},
 						"development": {
-							"tsConfig": "libs/shared/tsconfig.lib.json"
+							"tsConfig": "libs/client/shared/tsconfig.lib.json"
 						}
 					},
 					"defaultConfiguration": "production"
 				},
 				"test": {
 					"builder": "@nrwl/jest:jest",
-					"outputs": ["coverage/libs/shared"],
+					"outputs": ["coverage/libs/client/shared"],
 					"options": {
-						"jestConfig": "libs/shared/jest.config.js",
+						"jestConfig": "libs/client/shared/jest.config.js",
 						"passWithNoTests": true
 					}
 				},
 				"lint": {
 					"builder": "@nrwl/linter:eslint",
 					"options": {
-						"lintFilePatterns": ["libs/shared/src/**/*.ts", "libs/shared/src/**/*.html"]
+						"lintFilePatterns": ["libs/client/shared/src/**/*.ts", "libs/client/shared/src/**/*.html"]
 					}
 				}
 			},

@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { FeatureModule } from '@notepad-client/feature';
+import { FeatureModule } from '@notepad-api/feature';
 import configuration from './configuration';
 
 @Module({

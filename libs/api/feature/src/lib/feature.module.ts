@@ -11,22 +11,22 @@ import { UserModule } from './user';
 	imports: [
 		NoteModule,
 		UserModule,
-    RouterModule.register([
+		RouterModule.register([
 			{
 				path: 'api',
 				module: FeatureModule,
 				children: [
 					{
 						path: 'note',
-						module: NoteModule,
+						module: NoteModule
 					},
 					{
 						path: 'user',
-						module: UserModule,
-					},
+						module: UserModule
+					}
 				]
-			},
-    ]),
+			}
+		]),
 	]
 })
 export class FeatureModule {}

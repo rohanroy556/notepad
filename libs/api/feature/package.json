@@ -1,5 +1,5 @@
 {
-	"name": "@notepad-client/feature",
+	"name": "@notepad-api/feature",
 	"version": "0.0.1",
 	"peerDependencies": {
 		"@nestjs/common": "^8.0.0",

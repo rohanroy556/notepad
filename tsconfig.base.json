@@ -16,9 +16,9 @@
 		"baseUrl": ".",
 		"paths": {
 			"@notepad-api/database": ["libs/api/database/src/index.ts"],
+			"@notepad-api/feature": ["libs/api/feature/src/index.ts"],
 			"@notepad-client/dashboard": ["libs/client/dashboard/src/index.ts"],
 			"@notepad-client/editor": ["libs/client/editor/src/index.ts"],
-			"@notepad-client/feature": ["libs/client/feature/src/index.ts"],
 			"@notepad-client/material": ["libs/client/material/src/index.ts"],
 			"@notepad-client/shared": ["libs/client/shared/src/index.ts"],
 			"@notepad-helper/models": ["libs/helper/models/src/index.ts"]
