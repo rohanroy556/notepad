@@ -1,12 +1,12 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ServeStaticModule } from '@nestjs/serve-static';
-import { FeatureModule } from '@notepad-api/feature';
+import { ApiFeatureModule } from '@notepad-api/feature';
 import configuration from './configuration';
 
 @Module({
   imports: [
-		FeatureModule,
+		ApiFeatureModule,
     ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
     ServeStaticModule.forRootAsync({
       imports: [ConfigModule],

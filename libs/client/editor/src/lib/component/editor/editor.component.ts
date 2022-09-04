@@ -104,7 +104,7 @@ export class EditorComponent implements ControlValueAccessor, MatFormFieldContro
 	constructor(
 		private _focusMonitor: FocusMonitor,
 		private _elementRef: ElementRef<HTMLElement>,
-		@Optional() @Inject(MAT_FORM_FIELD) public _formField: MatFormField,
+		@Optional() @Inject(MAT_FORM_FIELD) public _formField: MatFormField | null,
 		@Optional() @Self() public ngControl: NgControl | null
 	) {
 		if (this.ngControl) {

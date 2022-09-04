@@ -53,7 +53,109 @@
 			},
 			"tags": []
 		},
-		"dashboard": {
+		"api-auth": {
+			"root": "libs/api/auth",
+			"sourceRoot": "libs/api/auth/src",
+			"projectType": "library",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:package",
+					"outputs": ["{options.outputPath}"],
+					"options": {
+						"outputPath": "dist/libs/api/auth",
+						"tsConfig": "libs/api/auth/tsconfig.lib.json",
+						"packageJson": "libs/api/auth/package.json",
+						"main": "libs/api/auth/src/index.ts",
+						"assets": ["libs/api/auth/*.md"]
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"outputs": ["{options.outputFile}"],
+					"options": {
+						"lintFilePatterns": ["libs/api/auth/**/*.ts"]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/libs/api/auth"],
+					"options": {
+						"jestConfig": "libs/api/auth/jest.config.js",
+						"passWithNoTests": true
+					}
+				}
+			},
+			"tags": []
+		},
+		"api-database": {
+			"root": "libs/api/database",
+			"sourceRoot": "libs/api/database/src",
+			"projectType": "library",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:package",
+					"outputs": ["{options.outputPath}"],
+					"options": {
+						"outputPath": "dist/libs/api/database",
+						"tsConfig": "libs/api/database/tsconfig.lib.json",
+						"packageJson": "libs/api/database/package.json",
+						"main": "libs/api/database/src/index.ts",
+						"assets": ["libs/api/database/*.md"]
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"outputs": ["{options.outputFile}"],
+					"options": {
+						"lintFilePatterns": ["libs/api/database/**/*.ts"]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/libs/api/database"],
+					"options": {
+						"jestConfig": "libs/api/database/jest.config.js",
+						"passWithNoTests": true
+					}
+				}
+			},
+			"tags": []
+		},
+		"api-feature": {
+			"root": "libs/api/feature",
+			"sourceRoot": "libs/api/feature/src",
+			"projectType": "library",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/node:package",
+					"outputs": ["{options.outputPath}"],
+					"options": {
+						"outputPath": "dist/libs/api/feature",
+						"tsConfig": "libs/api/feature/tsconfig.lib.json",
+						"packageJson": "libs/api/feature/package.json",
+						"main": "libs/api/feature/src/index.ts",
+						"assets": ["libs/api/feature/*.md"]
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"outputs": ["{options.outputFile}"],
+					"options": {
+						"lintFilePatterns": ["libs/api/feature/**/*.ts"]
+					}
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/libs/api/feature"],
+					"options": {
+						"jestConfig": "libs/api/feature/jest.config.js",
+						"passWithNoTests": true
+					}
+				}
+			},
+			"tags": []
+		},
+		"client-dashboard": {
 			"projectType": "library",
 			"root": "libs/client/dashboard",
 			"sourceRoot": "libs/client/dashboard/src",
@@ -92,41 +194,7 @@
 			},
 			"tags": []
 		},
-		"database": {
-			"root": "libs/api/database",
-			"sourceRoot": "libs/api/database/src",
-			"projectType": "library",
-			"architect": {
-				"build": {
-					"builder": "@nrwl/node:package",
-					"outputs": ["{options.outputPath}"],
-					"options": {
-						"outputPath": "dist/libs/api/database",
-						"tsConfig": "libs/api/database/tsconfig.lib.json",
-						"packageJson": "libs/api/database/package.json",
-						"main": "libs/api/database/src/index.ts",
-						"assets": ["libs/api/database/*.md"]
-					}
-				},
-				"lint": {
-					"builder": "@nrwl/linter:eslint",
-					"outputs": ["{options.outputFile}"],
-					"options": {
-						"lintFilePatterns": ["libs/api/database/**/*.ts"]
-					}
-				},
-				"test": {
-					"builder": "@nrwl/jest:jest",
-					"outputs": ["coverage/libs/api/database"],
-					"options": {
-						"jestConfig": "libs/api/database/jest.config.js",
-						"passWithNoTests": true
-					}
-				}
-			},
-			"tags": []
-		},
-		"editor": {
+		"client-editor": {
 			"projectType": "library",
 			"root": "libs/client/editor",
 			"sourceRoot": "libs/client/editor/src",
@@ -165,41 +233,7 @@
 			},
 			"tags": []
 		},
-		"feature": {
-			"root": "libs/api/feature",
-			"sourceRoot": "libs/api/feature/src",
-			"projectType": "library",
-			"architect": {
-				"build": {
-					"builder": "@nrwl/node:package",
-					"outputs": ["{options.outputPath}"],
-					"options": {
-						"outputPath": "dist/libs/api/feature",
-						"tsConfig": "libs/api/feature/tsconfig.lib.json",
-						"packageJson": "libs/api/feature/package.json",
-						"main": "libs/api/feature/src/index.ts",
-						"assets": ["libs/api/feature/*.md"]
-					}
-				},
-				"lint": {
-					"builder": "@nrwl/linter:eslint",
-					"outputs": ["{options.outputFile}"],
-					"options": {
-						"lintFilePatterns": ["libs/api/feature/**/*.ts"]
-					}
-				},
-				"test": {
-					"builder": "@nrwl/jest:jest",
-					"outputs": ["coverage/libs/api/feature"],
-					"options": {
-						"jestConfig": "libs/api/feature/jest.config.js",
-						"passWithNoTests": true
-					}
-				}
-			},
-			"tags": []
-		},
-		"material": {
+		"client-material": {
 			"projectType": "library",
 			"root": "libs/client/material",
 			"sourceRoot": "libs/client/material/src",
@@ -238,7 +272,46 @@
 			},
 			"tags": []
 		},
-		"models": {
+		"client-shared": {
+			"projectType": "library",
+			"root": "libs/client/shared",
+			"sourceRoot": "libs/client/shared/src",
+			"prefix": "notepad",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/angular:ng-packagr-lite",
+					"outputs": ["dist/libs/client/shared"],
+					"options": {
+						"project": "libs/client/shared/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "libs/client/shared/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "libs/client/shared/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/libs/client/shared"],
+					"options": {
+						"jestConfig": "libs/client/shared/jest.config.js",
+						"passWithNoTests": true
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": ["libs/client/shared/src/**/*.ts", "libs/client/shared/src/**/*.html"]
+					}
+				}
+			},
+			"tags": []
+		},
+		"helper-models": {
 			"root": "libs/helper/models",
 			"sourceRoot": "libs/helper/models/src",
 			"projectType": "library",
@@ -381,45 +454,6 @@
 			},
 			"tags": [],
 			"implicitDependencies": ["notepad"]
-		},
-		"shared": {
-			"projectType": "library",
-			"root": "libs/client/shared",
-			"sourceRoot": "libs/client/shared/src",
-			"prefix": "notepad",
-			"architect": {
-				"build": {
-					"builder": "@nrwl/angular:ng-packagr-lite",
-					"outputs": ["dist/libs/client/shared"],
-					"options": {
-						"project": "libs/client/shared/ng-package.json"
-					},
-					"configurations": {
-						"production": {
-							"tsConfig": "libs/client/shared/tsconfig.lib.prod.json"
-						},
-						"development": {
-							"tsConfig": "libs/client/shared/tsconfig.lib.json"
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"test": {
-					"builder": "@nrwl/jest:jest",
-					"outputs": ["coverage/libs/client/shared"],
-					"options": {
-						"jestConfig": "libs/client/shared/jest.config.js",
-						"passWithNoTests": true
-					}
-				},
-				"lint": {
-					"builder": "@nrwl/linter:eslint",
-					"options": {
-						"lintFilePatterns": ["libs/client/shared/src/**/*.ts", "libs/client/shared/src/**/*.html"]
-					}
-				}
-			},
-			"tags": []
 		}
 	}
 }

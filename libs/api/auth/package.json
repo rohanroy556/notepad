@@ -1,12 +1,11 @@
 {
-	"name": "@notepad-api/feature",
+	"name": "@notepad-api/auth",
 	"version": "0.0.1",
 	"peerDependencies": {
 		"@nestjs/common": "^8.0.0",
 		"@nestjs/config": "^1.1.6",
 		"@nestjs/core": "^8.0.0",
 		"@nestjs/mongoose": "^9.0.2",
-		"@notepad-api/auth": "~0.0.1",
 		"@notepad-api/database": "~0.0.1",
 		"@notepad-helper/models": "~0.0.1",
 		"mongoose": "^6.1.7"

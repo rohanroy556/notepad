@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { DatabaseModule } from '@notepad-api/database';
+import { ApiDatabaseModule } from '@notepad-api/database';
 import { PermissionController, RoleController, UserController } from './controller';
 
 @Module({
 	controllers: [UserController, PermissionController, RoleController],
-	imports: [DatabaseModule],
+	imports: [ApiDatabaseModule],
 })
 export class UserModule {}

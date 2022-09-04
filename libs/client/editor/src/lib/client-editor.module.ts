@@ -14,4 +14,4 @@ import { EditorComponent } from './component/editor/editor.component';
 	declarations: [EditorComponent],
 	exports: [EditorComponent]
 })
-export class EditorModule {}
+export class ClientEditorModule {}

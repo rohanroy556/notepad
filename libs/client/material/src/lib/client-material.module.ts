@@ -91,7 +91,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 		MatRippleModule,
 		MatSnackBarModule,
 		MatTreeModule,
-		OverlayModule
+		OverlayModule,
 	]
 })
-export class MaterialModule {}
+export class ClientMaterialModule {}

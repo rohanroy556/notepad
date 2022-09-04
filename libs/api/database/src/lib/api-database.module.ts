@@ -35,4 +35,4 @@ import { UserModule } from './user';
 	providers: [],
 	exports: [NoteModule, UserModule]
 })
-export class DatabaseModule {}
+export class ApiDatabaseModule {}
