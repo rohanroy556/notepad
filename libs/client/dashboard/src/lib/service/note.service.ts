@@ -21,7 +21,7 @@ export class NoteService {
 	}
 
 	create(form: NoteDto): Observable<Note> {
-		const note: Note = { ...form, _id: generateId(), author: 'rohanroy556', createdAt: new Date(), updatedAt: new Date() };
+		const note: Note = { ...form, _id: generateId(), createdBy: generateId(), createdAt: new Date(), updatedBy: generateId(), updatedAt: new Date() };
 		NOTES.push(note);
 		return of(note);
 	}

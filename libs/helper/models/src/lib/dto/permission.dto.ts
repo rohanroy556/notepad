@@ -1,9 +1,9 @@
-import { RulesLogic } from "json-logic-js";
-import { FeatureType, ActionType } from "../enum";
-import { Permission } from "../interface";
+import { ActionType, ResourceType } from "../enum";
+import { KeyEntity, Permission } from "../interface";
 
-export class PermissionDto implements Permission {
-	readonly feature!: FeatureType;
-	readonly action!: ActionType;
-	readonly condition!: RulesLogic;
+export class PermissionDto implements Omit<Permission, keyof KeyEntity> {
+	actions!: ReadonlyArray<ActionType>;
+	resourceId!: string;
+	resourceType!: ResourceType;
+	userId!: string;
 }

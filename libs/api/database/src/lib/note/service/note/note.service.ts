@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
-import { NoteDto } from '@notepad-helper/models';
+import { NoteDto, ResourceType } from '@notepad-helper/models';
 import { DeleteResult } from 'mongodb';
 import { FilterQuery, PaginateModel, PaginateOptions, PaginateResult } from 'mongoose';
+import { PermissionService, UserService } from '../../../user';
 import { Note } from '../../schema';
 
 @Injectable()
@@ -12,16 +13,32 @@ export class NoteService {
 
 	constructor(
 		private readonly _configService: ConfigService,
-		@InjectModel(Note.name) private readonly _noteModel: PaginateModel<Note>
+		private readonly _permissionService: PermissionService,
+		@InjectModel(Note.name) private readonly _noteModel: PaginateModel<Note>,
+		private readonly _userService: UserService,
 	) {}
 
-	create(noteDto: NoteDto): Promise<Note> {
-		const note = new this._noteModel({ ...noteDto, author: 'rohanroy556' });
-		return note.save();
+	async create(noteDto: NoteDto, userId: string): Promise<Note> {
+		const user = await this._userService.findById(userId);
+		if (!user) {
+			throw new BadRequestException();
+		}
+
+		const note = new this._noteModel(noteDto);
+		const newNote = await note.save();
+		if (newNote) {
+			await this._permissionService.addResourceCreator(newNote._id, ResourceType.NOTE, user._id);
+		}
+		return newNote;
 	}
 
-	update(id: string, noteDto: NoteDto): Promise<Note> {
-		return this._noteModel.findByIdAndUpdate(id, { $set: noteDto }).exec();
+	async update(id: string, noteDto: NoteDto, userId: string): Promise<Note> {
+		const user = await this._userService.findById(userId);
+		if (!user) {
+			throw new BadRequestException();
+		}
+
+		return this._noteModel.findByIdAndUpdate(id, { $set: { ...noteDto, updatedBy: user._id } }).exec();
 	}
 
 	count(query: FilterQuery<Note> = {}): Promise<number> {
@@ -34,6 +51,10 @@ export class NoteService {
 		options.select = options.select || { password: 0, role: 0 };
 		options.sort = options.sort || { name: 1 };
 		return this._noteModel.paginate(query, options);
+	}
+
+	findOne(query: FilterQuery<Note> = {}): Promise<Note> {
+		return this._noteModel.findOne(query).exec();
 	}
 
 	findById(id: string): Promise<Note> {

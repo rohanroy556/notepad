@@ -10,12 +10,12 @@ export class NoteController {
 
 	@Post()
 	create(@Body() noteDto: NoteDto): Promise<Note> {
-		return this._noteService.create(noteDto);
+		return this._noteService.create(noteDto, '');
 	}
 
 	@Put(':id')
 	update(@Param('id') id: string, @Body() noteDto: NoteDto): Promise<Note> {
-		return this._noteService.update(id, noteDto);
+		return this._noteService.update(id, noteDto, '');
 	}
 
 	@Get()

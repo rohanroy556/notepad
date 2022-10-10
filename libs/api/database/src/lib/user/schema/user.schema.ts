@@ -1,9 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { User as IUser } from '@notepad-helper/models';
+import { ResourceType, RoleType, User as IUser } from '@notepad-helper/models';
 import * as bcrypt from 'bcrypt';
-import { CallbackError, Document, model, Types } from "mongoose";
-import { Note } from '../../note/schema';
-import { Role } from './role.schema';
+import { Document, Types } from "mongoose";
+import { removePermissions } from '../../helper';
 
 @Schema({ timestamps: true })
 export class User extends Document implements IUser {
@@ -24,11 +23,17 @@ export class User extends Document implements IUser {
 	@Prop({ type: Date, required: false })
 	lastLogin: Date;
 
-	@Prop({ type: Types.ObjectId, ref: Role.name, required: true, autopopulate: true })
-	role: Role;
+	@Prop({ type: String, enum: RoleType, required: true, default: RoleType.USER })
+	role: RoleType;
+
+	@Prop({ type: Types.ObjectId, required: false })
+	createdBy: string;
 
 	@Prop({ type: Date, required: false })
 	createdAt: Date;
+
+	@Prop({ type: Types.ObjectId, required: false })
+	updatedBy: string;
 
 	@Prop({ type: Date, required: false })
 	updatedAt: Date;
@@ -42,10 +47,5 @@ UserSchema.methods.validatePassword = function (password: string): boolean {
 	return bcrypt.compareSync(password, this.password);
 }
 
-function removeMiddleWare (this: User, next: (err?: CallbackError) => void): void {
-	const _noteModel = model<Note>(Note.name);
-	_noteModel.deleteMany({ author: this.email }, next);
-}
-
-UserSchema.pre('deleteOne', removeMiddleWare);
-UserSchema.pre('remove', removeMiddleWare);
+UserSchema.pre('deleteOne', removePermissions(ResourceType.USER));
+UserSchema.pre('remove', removePermissions(ResourceType.USER));

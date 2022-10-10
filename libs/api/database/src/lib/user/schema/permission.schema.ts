@@ -1,24 +1,39 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Permission as IPermission, ActionType, FeatureType } from '@notepad-helper/models';
-import * as JsonLogic from 'json-logic-js';
-import { Document } from "mongoose";
+import { Permission as IPermission, ActionType, ResourceType } from '@notepad-helper/models';
+import { Document, Types } from "mongoose";
+import { removeResourcesOnDeleteMany, removeResourcesOnRemove } from '../../helper';
 
 @Schema({ timestamps: true })
 export class Permission extends Document implements IPermission {
-	@Prop({ type: String, required: true, enum: FeatureType })
-	feature: FeatureType;
+	_id: string;
 
-	@Prop({ type: String, required: true, enum: ActionType })
-	action: ActionType;
+	@Prop({ type: Array, required: true, enum: ActionType })
+	actions: ReadonlyArray<ActionType>;
 
-	@Prop({ type: Object, required: true })
-	condition: JsonLogic.RulesLogic;
+	@Prop({ type: Types.ObjectId, required: true })
+	resourceId: string;
 
-	checkCondition: <U, R>(user: U, resource: R) => boolean;
+	@Prop({ type: Types.ObjectId, required: true, enum: ResourceType })
+	resourceType: ResourceType;
+
+	@Prop({ type: String, required: true })
+	userId: string;
+
+	@Prop({ type: Types.ObjectId, required: false })
+	createdBy: string;
+
+	@Prop({ type: Date, required: false })
+	createdAt: Date;
+
+	@Prop({ type: Types.ObjectId, required: false })
+	updatedBy: string;
+
+	@Prop({ type: Date, required: false })
+	updatedAt: Date;
 }
 
 export const PermissionSchema = SchemaFactory.createForClass(Permission);
 
-PermissionSchema.methods.checkCondition = function <U, R>(user: U, resource: R): boolean {
-	return !!JsonLogic.apply(this.condition, { user, resource });
-}
+PermissionSchema.post('deleteMany', removeResourcesOnDeleteMany());
+PermissionSchema.post('deleteOne', removeResourcesOnRemove());
+PermissionSchema.post('remove', removeResourcesOnRemove());

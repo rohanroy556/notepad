@@ -1,6 +1,6 @@
-import { Content, Note } from "../interface";
+import { Content, KeyEntity, Note } from "../interface";
 
-export class NoteDto implements Pick<Note, 'name' | 'content'> {
+export class NoteDto implements Omit<Note, keyof KeyEntity> {
 	readonly name!: string;
 	readonly content!: Content;
 }

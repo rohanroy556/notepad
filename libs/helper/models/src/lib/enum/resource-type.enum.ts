@@ -1,6 +1,5 @@
-export enum FeatureType {
+export enum ResourceType {
 	NOTE = 'NOTE',
 	PERMISSION = 'PERMISSION',
-	ROLE = 'ROLE',
 	USER = 'USER'
 }

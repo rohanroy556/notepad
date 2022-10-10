@@ -569,10 +569,11 @@ const content: Content = {
 const notes = [...Array(100)].map((_, i) => ({
 	_id: generateId(),
 	name: `Note Title ${i + 1}`,
-	author: 'rohanroy556',
 	content,
+	createdBy: generateId(),
 	createdAt: new Date(1609459200000 + 3600000 * i),
-	updatedAt: new Date(1609545600000 + 3600000 * i)
+	updatedBy: generateId(),
+	updatedAt: new Date(1609545600000 + 3600000 * i),
 }));
 
 export function generateId() {
