@@ -18,7 +18,7 @@ export class UserSeedService {
 			for (const seedUser of seedUsers) {
 				const user = await this._userService.findByEmail(seedUser.email);
 
-				if (!!user) {
+				if (!user) {
 					const systemUser = await this._userService.findOne({ role: RoleType.SYSTEM });
 					await this._userService.create(seedUser, systemUser?._id);
 					console.log(`User: Successfully created ${ seedUser.role } user!`);

@@ -1,3 +1,4 @@
+export * from './client.interface';
 export * from './content.interface';
 export * from './database-seed.interface';
 export * from './key-entity.interface';

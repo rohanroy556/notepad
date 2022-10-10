@@ -3,12 +3,15 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import * as mongooseAutopopulate from 'mongoose-autopopulate';
 import * as mongoosePaginate from 'mongoose-paginate';
+import { ClientModule } from './client';
 import { NoteModule } from './note';
 import { SeedModule } from './seed';
+import { ServiceModule } from './service';
 import { UserModule } from './user';
 
 @Module({
   imports: [
+		ClientModule,
     ConfigModule,
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
@@ -29,10 +32,11 @@ import { UserModule } from './user';
     }),
 		NoteModule,
 		SeedModule,
-		UserModule
+		ServiceModule,
+		UserModule,
   ],
 	controllers: [],
 	providers: [],
-	exports: [NoteModule, UserModule]
+	exports: [ClientModule, NoteModule, ServiceModule, UserModule]
 })
 export class ApiDatabaseModule {}

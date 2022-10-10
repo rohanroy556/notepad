@@ -1,20 +1,19 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
-import { ResourceType, RoleType, UserDto } from '@notepad-helper/models';
+import { ResourceType, UserDto } from '@notepad-helper/models';
 import { DeleteResult } from 'mongodb';
 import { FilterQuery, PaginateModel, PaginateOptions, PaginateResult } from 'mongoose';
+import { UtilityService } from '../../../service';
 import { User } from '../../schema';
 import { PermissionService } from '../permission/permission.service';
 
 @Injectable()
 export class UserService {
-	private readonly _DEFAULT_PAGINATE_OPTIONS: PaginateOptions = this._configService.get('DEFAULT_PAGINATE_OPTIONS');
-
 	constructor(
-		private readonly _configService: ConfigService,
 		private readonly _permissionService: PermissionService,
 		@InjectModel(User.name) private readonly _userModel: PaginateModel<User>,
+		private readonly _utilityService: UtilityService,
 	) {}
 
 	async create(userDto: UserDto, userId?: string): Promise<User> {
@@ -47,8 +46,7 @@ export class UserService {
 	}
 
 	find(query: FilterQuery<User> = {}, options: PaginateOptions = {}): Promise<PaginateResult<User>> {
-		options.limit = Number(options.limit) >= 1 ? Number(options.limit) : this._DEFAULT_PAGINATE_OPTIONS.limit;
-		options.page = Number(options.page) >= 1 ? Number(options.page) : this._DEFAULT_PAGINATE_OPTIONS.page;
+		options = this._utilityService.setDefaultPaginationOptions(options);
 		options.select = options.select || { password: 0, role: 0 };
 		options.sort = options.sort || { name: 1 };
 		return this._userModel.paginate(query, options);

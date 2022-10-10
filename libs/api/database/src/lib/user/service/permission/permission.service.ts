@@ -4,17 +4,16 @@ import { InjectModel } from '@nestjs/mongoose';
 import { ActionType, PermissionDto, ResourceType } from '@notepad-helper/models';
 import { DeleteResult } from 'mongodb';
 import { FilterQuery, PaginateModel, PaginateOptions, PaginateResult } from 'mongoose';
+import { UtilityService } from '../../../service';
 import { Permission } from '../../schema';
 import { UserService } from '../user/user.service';
 
 @Injectable()
 export class PermissionService {
-	private readonly _DEFAULT_PAGINATE_OPTIONS: PaginateOptions = this._configService.get('DEFAULT_PAGINATE_OPTIONS');
-
 	constructor(
-		private readonly _configService: ConfigService,
 		@InjectModel(Permission.name) private readonly _permissionModel: PaginateModel<Permission>,
 		private readonly _userService: UserService,
+		private readonly _utilityService: UtilityService,
 	) {}
 
 	async create(permissionDto: PermissionDto, userId: string): Promise<Permission> {
@@ -53,10 +52,7 @@ export class PermissionService {
 	}
 
 	find(query: FilterQuery<Permission> = {}, options: PaginateOptions = {}): Promise<PaginateResult<Permission>> {
-		options.limit = Number(options.limit) >= 1 ? Number(options.limit) : this._DEFAULT_PAGINATE_OPTIONS.limit;
-		options.page = Number(options.page) >= 1 ? Number(options.page) : this._DEFAULT_PAGINATE_OPTIONS.page;
-		options.select = options.select || { condition: 0 };
-		options.sort = options.sort || { feature: 1, action: 1 };
+		options = this._utilityService.setDefaultPaginationOptions(options);
 		return this._permissionModel.paginate(query, options);
 	}
 
