@@ -58,7 +58,11 @@ export class NoteService {
 		return this._noteModel.findById(id).exec();
 	}
 
-	delete(id: string): Promise<DeleteResult> {
-		return this._noteModel.deleteOne({ id }).exec();
+	async delete(id: string): Promise<DeleteResult> {
+		const deleteResult = await this._noteModel.deleteOne({ id }).exec();
+		if (deleteResult?.deletedCount > 0) {
+			await this._permissionService.deleteMany({ resourceId: id, resourceType: ResourceType.NOTE });
+		}
+		return deleteResult;
 	}
 }

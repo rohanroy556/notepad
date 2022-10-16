@@ -1,12 +1,10 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Note as INote, ResourceType } from '@notepad-helper/models';
+import { Note as INote } from '@notepad-helper/models';
 import { Content } from '@notepad-helper/models';
 import { Document, Types } from "mongoose";
-import { removePermissions } from '../../helper';
 
 @Schema({ timestamps: true })
 export class Note extends Document implements INote {
-	@Prop({ type: Types.ObjectId, required: false })
 	_id: string;
 
 	@Prop({ type: String, required: true })
@@ -29,6 +27,3 @@ export class Note extends Document implements INote {
 }
 
 export const NoteSchema = SchemaFactory.createForClass(Note);
-
-NoteSchema.pre('deleteOne', removePermissions(ResourceType.NOTE));
-NoteSchema.pre('remove', removePermissions(ResourceType.NOTE));

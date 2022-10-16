@@ -64,7 +64,11 @@ export class UserService {
 		return this._userModel.findById(id).exec();
 	}
 
-	delete(id: string): Promise<DeleteResult> {
-		return this._userModel.deleteOne({ id }).exec();
+	async delete(id: string): Promise<DeleteResult> {
+		const deleteResult = await this._userModel.deleteOne({ id }).exec();
+		if (deleteResult?.deletedCount > 0) {
+			await this._permissionService.deleteMany({ resourceId: id, resourceType: ResourceType.USER });
+		}
+		return deleteResult;
 	}
 }

@@ -1,8 +1,7 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { ResourceType, RoleType, User as IUser } from '@notepad-helper/models';
+import { RoleType, User as IUser } from '@notepad-helper/models';
 import * as bcrypt from 'bcrypt';
 import { Document, Types } from "mongoose";
-import { removePermissions } from '../../helper';
 
 @Schema({ timestamps: true })
 export class User extends Document implements IUser {
@@ -46,6 +45,3 @@ export const UserSchema = SchemaFactory.createForClass(User);
 UserSchema.methods.validatePassword = function (password: string): boolean {
 	return bcrypt.compareSync(password, this.password);
 }
-
-UserSchema.pre('deleteOne', removePermissions(ResourceType.USER));
-UserSchema.pre('remove', removePermissions(ResourceType.USER));

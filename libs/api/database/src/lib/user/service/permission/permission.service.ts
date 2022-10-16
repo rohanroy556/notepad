@@ -1,23 +1,21 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { ActionType, PermissionDto, ResourceType } from '@notepad-helper/models';
 import { DeleteResult } from 'mongodb';
 import { FilterQuery, PaginateModel, PaginateOptions, PaginateResult } from 'mongoose';
 import { UtilityService } from '../../../service';
-import { Permission } from '../../schema';
-import { UserService } from '../user/user.service';
+import { Permission, User } from '../../schema';
 
 @Injectable()
 export class PermissionService {
 	constructor(
 		@InjectModel(Permission.name) private readonly _permissionModel: PaginateModel<Permission>,
-		private readonly _userService: UserService,
+		@InjectModel(User.name) private readonly _userModel: PaginateModel<User>,
 		private readonly _utilityService: UtilityService,
 	) {}
 
 	async create(permissionDto: PermissionDto, userId: string): Promise<Permission> {
-		const user = await this._userService.findById(userId);
+		const user = await this._findUserById(userId);
 		if (!user) {
 			throw new BadRequestException();
 		}
@@ -39,7 +37,7 @@ export class PermissionService {
 	}
 
 	async update(id: string, permissionDto: PermissionDto, userId: string): Promise<Permission> {
-		const user = await this._userService.findById(userId);
+		const user = await this._findUserById(userId);
 		if (!user) {
 			throw new BadRequestException();
 		}
@@ -66,5 +64,13 @@ export class PermissionService {
 
 	delete(id: string): Promise<DeleteResult> {
 		return this._permissionModel.deleteOne({ id }).exec();
+	}
+
+	deleteMany(query: FilterQuery<Permission> = {}): Promise<DeleteResult> {
+		return this._permissionModel.deleteMany(query).exec();
+	}
+
+	private _findUserById(id: string): Promise<User> {
+		return this._userModel.findById(id).exec();
 	}
 }

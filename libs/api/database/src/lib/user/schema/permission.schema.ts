@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Permission as IPermission, ActionType, ResourceType } from '@notepad-helper/models';
 import { Document, Types } from "mongoose";
-import { removeResourcesOnDeleteMany, removeResourcesOnRemove } from '../../helper';
 
 @Schema({ timestamps: true })
 export class Permission extends Document implements IPermission {
@@ -33,7 +32,3 @@ export class Permission extends Document implements IPermission {
 }
 
 export const PermissionSchema = SchemaFactory.createForClass(Permission);
-
-PermissionSchema.post('deleteMany', removeResourcesOnDeleteMany());
-PermissionSchema.post('deleteOne', removeResourcesOnRemove());
-PermissionSchema.post('remove', removeResourcesOnRemove());

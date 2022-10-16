@@ -23,7 +23,7 @@ export class UserSeedService {
 					await this._userService.create(seedUser, systemUser?._id);
 					console.log(`User: Successfully created ${ seedUser.role } user!`);
 				} else {
-					console.log('User: Admin user already exists!');
+					console.log(`User: ${ seedUser.role } user already exists!`);
 				}
 			}
 		} catch (error) {
