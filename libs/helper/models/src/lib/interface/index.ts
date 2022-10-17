@@ -7,6 +7,7 @@ export * from './key-entity.interface';
 export * from './note.interface';
 export * from './on-deactivate.interface';
 export * from './permission.interface';
+export * from './token-data.interface';
 export * from './user-credentials.interface';
 export * from './user-token-payload.interface';
 export * from './user.interface';

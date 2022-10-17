@@ -1,5 +1,4 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
 import { ResourceType, UserDto } from '@notepad-helper/models';
 import { DeleteResult } from 'mongodb';
