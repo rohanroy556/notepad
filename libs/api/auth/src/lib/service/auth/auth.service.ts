@@ -2,7 +2,7 @@ import { ForbiddenException, Injectable, UnauthorizedException } from '@nestjs/c
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
 import { ClientService, UserService } from '@notepad-api/database';
-import { AccessorType, Client, ClientCredentials, ClientTokenPayload, User, UserCredentials, UserTokenPayload } from '@notepad-helper/models';
+import { AccessorType, Client, ClientCredentials, ClientTokenPayload, DecodedToken, User, UserCredentials, UserTokenPayload } from '@notepad-helper/models';
 
 @Injectable()
 export class AuthService {
@@ -31,13 +31,13 @@ export class AuthService {
 
 	async loginClient(clientCredentials: ClientCredentials): Promise<string | null> {
 		try {
-			const client = await this._clientService.findById(clientCredentials._id);
-			if (!client || client.secret !== clientCredentials.secret) {
+			const client = await this._clientService.findById(clientCredentials._id, { name: 1, secret: 1 });
+			if (!client || client.validateSecret(clientCredentials.secret)) {
 				throw new UnauthorizedException();
 			}
 
 			return this._jwtService.sign(
-				{ name: client.name },
+				{ name: client.name, type: AccessorType.CLIENT },
 				{ secret: this._masterJwtSecret, expiresIn: 31536000 },
 			);
 		} catch (error) {
@@ -48,8 +48,8 @@ export class AuthService {
 
 	async validateUserToken(token: string): Promise<User | null> {
 		try {
-			const decodedPayload = this._jwtService.decode(token, { complete: true, json: true }) as UserTokenPayload;
-			const client = await this._clientService.findByName(decodedPayload?.client);
+			const decodedPayload = this._jwtService.decode(token, { complete: true, json: true }) as DecodedToken<UserTokenPayload>;
+			const client = await this._clientService.findByName(decodedPayload?.payload?.client);
 			if (!client) {
 				throw new ForbiddenException();
 			}
@@ -74,14 +74,14 @@ export class AuthService {
 				throw new ForbiddenException();
 			}
 
-			const user = await this._userService.findById(userCredentials.email);
+			const user = await this._userService.findByEmail(userCredentials.email, { email: 1, password: 1, role: 1 });
 			if (!user || !user.validatePassword(userCredentials.password)) {
 				throw new UnauthorizedException();
 			}
 
 			return this._jwtService.sign(
-				{ email: user.email, role: user.role, client: client.name },
-				{ secret: this._masterJwtSecret, expiresIn: 31536000 },
+				{ email: user.email, role: user.role, client: client.name, type: AccessorType.USER },
+				{ secret: client.jwtSecret, expiresIn: 31536000 },
 			);
 		} catch (error) {
 			console.error(error);
@@ -91,8 +91,8 @@ export class AuthService {
 
 	getTokenType(token: string): AccessorType {
 		try {
-			const decodedPayload = this._jwtService.decode(token, { complete: true, json: true }) as UserTokenPayload | ClientTokenPayload;
-			return decodedPayload?.type ?? AccessorType.USER;
+			const decodedPayload = this._jwtService.decode(token, { complete: true, json: true }) as DecodedToken<ClientTokenPayload | UserTokenPayload>;
+			return decodedPayload?.payload?.type ?? AccessorType.USER;
 		} catch(error) {
 			return AccessorType.USER;
 		}

@@ -9,11 +9,17 @@ export class Client extends Document implements IClient {
 	@Prop({ type: String, required: true, unique: true })
 	name: string;
 
-	@Prop({ type: String, required: true, unique: true })
+	@Prop({ type: String, required: true, select: false, unique: true })
 	secret: string;
 
 	@Prop({ type: Object, required: true, unique: true })
 	jwtSecret: string;
+
+	validateSecret: (secret: string) => boolean;
 }
 
 export const ClientSchema = SchemaFactory.createForClass(Client);
+
+ClientSchema.methods.validateSecret = function (secret: string): boolean {
+	return secret === this.secret;
+}

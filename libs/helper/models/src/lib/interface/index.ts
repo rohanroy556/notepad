@@ -3,6 +3,7 @@ export * from './client-token-payload.interface';
 export * from './client.interface';
 export * from './content.interface';
 export * from './database-seed.interface';
+export * from './decoded-token.interface';
 export * from './key-entity.interface';
 export * from './note.interface';
 export * from './on-deactivate.interface';

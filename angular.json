@@ -155,6 +155,45 @@
 			},
 			"tags": []
 		},
+		"client-auth": {
+			"projectType": "library",
+			"root": "libs/client/auth",
+			"sourceRoot": "libs/client/auth/src",
+			"prefix": "notepad",
+			"architect": {
+				"build": {
+					"builder": "@nrwl/angular:package",
+					"outputs": ["dist/libs/client/auth"],
+					"options": {
+						"project": "libs/client/auth/ng-package.json"
+					},
+					"configurations": {
+						"production": {
+							"tsConfig": "libs/client/auth/tsconfig.lib.prod.json"
+						},
+						"development": {
+							"tsConfig": "libs/client/auth/tsconfig.lib.json"
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"test": {
+					"builder": "@nrwl/jest:jest",
+					"outputs": ["coverage/libs/client/auth"],
+					"options": {
+						"jestConfig": "libs/client/auth/jest.config.js",
+						"passWithNoTests": true
+					}
+				},
+				"lint": {
+					"builder": "@nrwl/linter:eslint",
+					"options": {
+						"lintFilePatterns": ["libs/client/auth/src/**/*.ts", "libs/client/auth/src/**/*.html"]
+					}
+				}
+			},
+			"tags": []
+		},
 		"client-dashboard": {
 			"projectType": "library",
 			"root": "libs/client/dashboard",

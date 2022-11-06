@@ -20,12 +20,12 @@ export class ClientService {
 		return this._clientModel.findByIdAndUpdate(id, { $set: clientDto }).exec();
 	}
 
-	findById(id: string): Promise<Client> {
-		return this._clientModel.findById(id).exec();
+	findById(id: string, projection: Record<string, number> = {}): Promise<Client> {
+		return this._clientModel.findById(id, projection).select({ secret: 0 }).exec();
 	}
 
-	findByName(name: string): Promise<Client> {
-		return this._clientModel.findOne({ name }).exec();
+	findByName(name: string, projection: Record<string, number> = {}): Promise<Client> {
+		return this._clientModel.findOne({ name }, projection).select({ secret: 0 }).exec();
 	}
 
 	delete(id: string): Promise<DeleteResult> {

@@ -13,7 +13,12 @@ export class User extends Document implements IUser {
 	@Prop({ type: String, required: true, unique: true })
 	email: string;
 
-	@Prop({ type: String, required: true, select: false, set: function(password: string) { return bcrypt.hashSync(password, 20); } })
+	@Prop({
+		type: String,
+		required: true,
+		select: false,
+		set: function(password: string) { return bcrypt.hashSync(password, 12); },
+	})
 	password?: string;
 
 	@Prop({ type: Boolean, required: true })
@@ -43,5 +48,6 @@ export class User extends Document implements IUser {
 export const UserSchema = SchemaFactory.createForClass(User);
 
 UserSchema.methods.validatePassword = function (password: string): boolean {
+	console.log(this);
 	return bcrypt.compareSync(password, this.password);
 }

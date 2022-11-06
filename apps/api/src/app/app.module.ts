@@ -5,16 +5,16 @@ import { ApiFeatureModule } from '@notepad-api/feature';
 import configuration from './configuration';
 
 @Module({
-  imports: [
+	imports: [
 		ApiFeatureModule,
-    ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
-    ServeStaticModule.forRootAsync({
-      imports: [ConfigModule],
-      useFactory: (configService: ConfigService) => [{
-        rootPath: configService.get('NOTEPAD_BUILD_PATH')
-      }],
-      inject: [ConfigService]
+		ConfigModule.forRoot({ isGlobal: true, load: [configuration] }),
+		ServeStaticModule.forRootAsync({
+			imports: [ConfigModule],
+			useFactory: (configService: ConfigService) => [{
+				rootPath: configService.get('NOTEPAD_BUILD_PATH')
+			}],
+			inject: [ConfigService]
 		}),
-  ]
+	]
 })
 export class AppModule {}

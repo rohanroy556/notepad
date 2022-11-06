@@ -46,21 +46,21 @@ export class UserService {
 
 	find(query: FilterQuery<User> = {}, options: PaginateOptions = {}): Promise<PaginateResult<User>> {
 		options = this._utilityService.setDefaultPaginationOptions(options);
-		options.select = options.select || { password: 0, role: 0 };
+		options.select = options.select || { password: 0 };
 		options.sort = options.sort || { name: 1 };
 		return this._userModel.paginate(query, options);
 	}
 
-	findOne(query: FilterQuery<User> = {}): Promise<User> {
-		return this._userModel.findOne(query).exec();
+	findOne(query: FilterQuery<User> = {}, projection: Record<string, number> = {}): Promise<User> {
+		return this._userModel.findOne(query, projection).exec();
 	}
 
-	findByEmail(email: string): Promise<User> {
-		return this._userModel.findOne({ email }).exec();
+	findByEmail(email: string, projection: Record<string, number> = {}): Promise<User> {
+		return this._userModel.findOne({ email }, projection).exec();
 	}
 
-	findById(id: string): Promise<User> {
-		return this._userModel.findById(id).exec();
+	findById(id: string, projection: Record<string, number> = {}): Promise<User> {
+		return this._userModel.findById(id, projection).exec();
 	}
 
 	async delete(id: string): Promise<DeleteResult> {

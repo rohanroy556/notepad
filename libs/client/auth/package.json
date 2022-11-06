@@ -1,12 +1,9 @@
 {
-	"name": "@notepad-client/dashboard",
+	"name": "@notepad-client/auth",
 	"version": "0.0.1",
 	"peerDependencies": {
 		"@angular/common": "^13.1.0",
 		"@angular/core": "^13.1.0",
-		"@angular/forms": "~13.1.0",
-		"@notepad-client/auth": "~0.0.1",
-		"@notepad-client/editor": "~0.0.1",
 		"@notepad-client/material": "~0.0.1",
 		"@notepad-client/shared": "~0.0.1",
 		"@notepad-helper/models": "~0.0.1"

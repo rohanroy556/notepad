@@ -1,6 +1,7 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { AccessorType, Client, StrategyType, User } from '@notepad-helper/models';
+import { Request } from 'express';
 import { Strategy } from 'passport-custom';
 import { AuthService } from '../service';
 
@@ -12,7 +13,7 @@ export class RequestStrategy extends PassportStrategy(Strategy, StrategyType.REQ
 
 	async validate(request: Request): Promise<Client | User> {
 		const headers = request?.headers;
-		const token = headers?.get('Authorization')?.replace('Bearer ', '') ?? '';
+		const token = headers?.authorization?.replace('Bearer ', '') ?? '';
 		if (!token) {
 			throw new ForbiddenException();
 		}

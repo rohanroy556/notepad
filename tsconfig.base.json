@@ -18,6 +18,7 @@
 			"@notepad-api/auth": ["libs/api/auth/src/index.ts"],
 			"@notepad-api/database": ["libs/api/database/src/index.ts"],
 			"@notepad-api/feature": ["libs/api/feature/src/index.ts"],
+			"@notepad-client/auth": ["libs/client/auth/src/index.ts"],
 			"@notepad-client/dashboard": ["libs/client/dashboard/src/index.ts"],
 			"@notepad-client/editor": ["libs/client/editor/src/index.ts"],
 			"@notepad-client/material": ["libs/client/material/src/index.ts"],
